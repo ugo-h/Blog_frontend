@@ -1,0 +1,21 @@
+.Header{
+    padding: 1rem;
+}
+.Header ul{
+    padding:0;
+    list-style: none;
+    display: flex;
+}
+.Header__nav__el{
+    margin: 0 1rem;
+    color: black;
+}
+.Header__nav__el:hover{
+    color: orange;
+}
+.Header__nav__el a{
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
