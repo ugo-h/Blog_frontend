@@ -6,18 +6,6 @@ import SignUp from './Containers/Form/SignUp/SignUp';
 import SignIn from './Containers/Form/SignIn/SIgnIn'; 
 import Posts from './routes/Posts';
 import Home from './routes/Home';
-import FormTemplate from './Containers/Form/FormTemplate';
-
-async function sendSignUpRequest(data) {
-  const res = await fetch('http://localhost:5000/signin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },    
-            body: JSON.stringify(data)
-        });
-  return res;
-}
 
 function App() {
   return (
@@ -25,17 +13,17 @@ function App() {
       <div className="App">
       <Header/>
         <Switch>
-          <Route path="/test">
-              <FormTemplate 
-              fields={['email', 'password']}
-              sendRequest={sendSignUpRequest}
-              />
-          </Route>
             <Route path="/signup">
-                <SignUp/>
+                <SignUp
+                  fields={['email', 'password', 'password confirmation']}
+                  route='signup'
+                />
             </Route>
             <Route path="/signin">
-                <SignIn/>
+                <SignIn
+                fields={['email', 'password']}
+                route='signin'
+                />
             </Route>
             <Route path="/posts">
                <Posts/>

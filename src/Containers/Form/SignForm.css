@@ -9,6 +9,7 @@
 .SignForm label{
     width: 100%;
     margin-bottom: 1rem;
+    text-transform: capitalize;
 }
 .SignForm input{
     width:100%;

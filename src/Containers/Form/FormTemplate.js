@@ -25,21 +25,29 @@ class FormTemplate extends Component {
         this.setState({errors: emptyFields})
         this.setState({...emptyFields});
 
-        const res = await this.props.sendRequest(data);
+        const res = await this.sendPostRequest(data, this.props.route);
         const body = await res.json();
-        
+
         if(this.hasErrorsResponse(body)) {
             this.displayErrors(body);
             return;
         }
-        this.processResponse(res);
+        this.processResponse(res, body);
     };
+    async sendPostRequest(data, route) {
+        const res = await fetch(`http://localhost:5000/${route}`, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },    
+                  body: JSON.stringify(data)
+              });
+        return res;
+      }
+      
     hasErrorsResponse(body) {
-        const errRes = body['errors'];
-        if(!errRes) {
-            return false;
-        }
-        return true
+        return !!body['errors'];
+        
     }
     displayErrors(body) {
         const errRes = body['errors'];
@@ -50,7 +58,7 @@ class FormTemplate extends Component {
         }
         this.setState({errors});
     }
-    processResponse(res) {
+    processResponse(res, body) {
 
     }
   
@@ -67,6 +75,7 @@ class FormTemplate extends Component {
             <label key={index}>
                 {field}
                 <input 
+                    type={field.includes('password')?'password':''}
                     value={this.state[field]}
                     name={field}
                     onChange={this.inputChangeHandler.bind(this)}
