@@ -14,7 +14,10 @@ class SignUp extends Component {
     }
     async submitHandler(ev) {
         ev.preventDefault();
-        const data = { ...this.state };
+        const user = {};
+        user.email = this.state.email;
+        user.password = this.state.password;
+        user.passwordConfirmation = this.state.passwordConfirmation;
         this.setState({
                 email:'',
                 password:'',
@@ -25,7 +28,7 @@ class SignUp extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },    
-            body: JSON.stringify(data)
+            body: JSON.stringify(user)
         });
         let errRes = await res.json();
         console.log(errRes)
@@ -68,7 +71,7 @@ class SignUp extends Component {
                 <input name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.inputChangeHandler.bind(this)}/>
                 <span className="form__error">{this.state.errors.passwordConfirmation}</span>
             </label>
-            <input type="submit" value="submit"/>
+            <input type="submit" value="Sign Up"/>
         </form>
         )
     }

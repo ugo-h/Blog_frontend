@@ -1,0 +1,30 @@
+.SignForm{
+    display:flex;
+    flex-flow: column;
+    align-items:  flex-start;
+    width:100%;
+    max-width: 400px;
+    padding:1rem;
+}
+.SignForm label{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.SignForm input{
+    width:100%;
+    padding: 0.5rem;
+    
+}
+.form__error{
+    color: red;
+}
+.SignForm button{
+    cursor: pointer;
+    padding:1rem;
+    border: none;
+    background: #ccc;
+    max-width: 6rem;
+}
+.SignForm button:hover{
+    background:#999;
+}

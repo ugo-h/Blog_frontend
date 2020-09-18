@@ -1,0 +1,20 @@
+.Post-preview{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.Post-preview__content{
+    padding-left: 0.5rem;
+}
+.Post-preview__link{
+    text-decoration: none;
+    color:  black;
+    padding-left: 0.5rem;
+    align-self: flex-end;
+}
+.Post-preview__link:hover {
+    color:orange;
+}
