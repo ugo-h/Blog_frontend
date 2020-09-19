@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './App.css';
 import Header from './Components/Header/Header';
-import SignUp from './routes/SignUp'
-import SignIn from './routes/SignIn';
-import SignOut from './routes/SignOut'; 
-import Posts from './routes/Posts';
+import SignUp from './routes/Auth/SignUp'
+import SignIn from './routes/Auth/SignIn';
+import SignOut from './routes/Auth/SignOut'; 
+import Posts from './routes/Posts/Posts';
 import Home from './routes/Home';
+import Tags from './routes/Tags/Tags'
 import { Protected, RedirectWhenAuth } from './Helper/Protected';
 
+//MAKE EVERYthINg EXCEPT PAGES OF SINGLE ELEMENTS (Post page,
+// tag psge, user page)
+//FUNCTION BASED
+//FETCH ON USEEFFECT WITCH CALLBACK FROM APP AND SAVE
+//IN THE STATE OF APP COMPONENT
 class App extends Component {
   state = {
     userToken: ''
@@ -46,7 +52,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
         <Header isAuth={this.state.userToken} signOutHandler={this.logOutHandler.bind(this)}/>
-        <h2>{this.state.userToken?'Hello, user122':'You are not logged in'}</h2>
+        {/* <h2>{this.state.userToken?'Hello, user122':'You are not logged in'}</h2> */}
           <Switch>
             <Route path="/signout">
               <Protected isAuth = {this.state.userToken}>
@@ -70,6 +76,9 @@ class App extends Component {
               </Route>
               <Route path="/posts">
                 <Posts isAuth={this.state.userToken}/>
+              </Route>
+              <Route>
+                <Tags/>
               </Route>
               <Route path="/">
                 <Home/>

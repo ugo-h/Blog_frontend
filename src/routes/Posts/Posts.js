@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route, Link, useRouteMatch } from 'react-router-dom';
-import PostsList from '../Components/PostsList/PostsList';
+import PostsList from '../../Components/PostsList/PostsList';
 import PostRoute from './PostRoute';
 import PostNew from './PostNew';
-import { Protected } from '../Helper/Protected';
+import { Protected } from '../../Helper/Protected';
 
 function Posts(props) { 
     let match = useRouteMatch();

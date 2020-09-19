@@ -12,6 +12,9 @@ const header = (props) => (
                 <li className="Header__nav__el">
                     <Link to="/posts">Posts</Link>
                 </li>
+                <li className="Header__nav__el">
+                    <Link to="/tags">Tags</Link>
+                </li>
             </ul>
         </nav>
         <nav className="Header__nav--right">

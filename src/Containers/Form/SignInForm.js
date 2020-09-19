@@ -10,7 +10,7 @@ class SignIn extends FormTemplate {
     
     processResponse(res, body) {
         const userToken = body.token;
-        // console.log(this.props);
+        console.log(body);
         this.props.signInHandler(userToken);
 
     }

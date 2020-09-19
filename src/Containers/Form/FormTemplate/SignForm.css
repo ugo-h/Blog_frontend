@@ -11,10 +11,13 @@
     margin-bottom: 1rem;
     text-transform: capitalize;
 }
-.SignForm input{
+.SignForm input, textarea{
     width:100%;
     padding: 0.5rem;
     
+}
+.SignForm textarea{
+    height:4rem;
 }
 .form__error{
     color: red;

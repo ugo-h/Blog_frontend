@@ -3,10 +3,17 @@
     flex-flow:column;
     align-items: center;
 }
+body{
+    /* background: #ccc; */
+}
 main{
+    background: white;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    box-shadow: 0 7px 7px rgba(0, 0, 0, 0.1);
     display:flex;
     flex-flow:column;
     align-items: center;
-    max-width: 800px;
+    max-width: 700px;
     width:100%;
   }

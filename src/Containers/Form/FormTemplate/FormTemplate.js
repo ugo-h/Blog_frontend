@@ -6,21 +6,23 @@ class FormTemplate extends Component {
         super(props);
         const emptyFields = this.createEmptyFieldsFromProps();
         const errors =  this.createEmptyFieldsFromProps();
-        this.state = {...emptyFields, errors};
-        console.log(this.state.errors)
-        
+        this.state = { ...emptyFields, errors };
+        console.log(this.state);
     }
+    
     createEmptyFieldsFromProps() {
         const emptyFields = {};
-        this.props.fields.forEach((fieldName) => {
+        for(const fieldName in this.props.fields) {
             emptyFields[fieldName] = '';
-        })
+        }
         return emptyFields;
     }
     async submitHandler(ev) {
         ev.preventDefault();
-        const data = { ...this.state };
- 
+        const data = {}
+        for(const fieldKey in this.props.fields) {
+            data[fieldKey] = this.state[fieldKey];
+        }
         //set empty strings to errors and to all fields
         const emptyFields = this.createEmptyFieldsFromProps();
         this.setState({errors: emptyFields})
@@ -71,21 +73,43 @@ class FormTemplate extends Component {
         this.setState({ [name]:value });
     }
 
-    renderFields() {
-        return this.props.fields.map((field, index) => (
-            <label key={index}>
-                {field}
-                <input 
-                    type={field.includes('password')?'password':''}
+    getInput(type, field) {
+        if(type==='textarea') {
+            return(
+                <textarea 
                     value={this.state[field]}
                     name={field}
                     onChange={this.inputChangeHandler.bind(this)}
                 />
+            )
+        } else {
+            return(
+                <input 
+                type={type}
+                value={this.state[field]}
+                name={field}
+                onChange={this.inputChangeHandler.bind(this)}
+            />
+            )
+        }
+    }
+
+    renderFields() {
+        const render = [];
+        let index = 0;
+        for(const field in this.props.fields) {
+            render.push(
+            <label key={index}>
+                {field}
+                {this.getInput(this.props.fields[field], field)}
                 <span className="form__error">
                     {this.state.errors[field]}
                 </span>
             </label>
-        ))
+            )
+            index++;
+        }
+        return render;
     }
     render() {
         return(
