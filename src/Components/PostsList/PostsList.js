@@ -8,11 +8,24 @@ class Posts extends Component {
     };
 
     async componentDidMount() {
-        const res = await fetch('http://localhost:5000');
+        const res = await fetch('http://localhost:5000/posts');
         const postsList = await res.json();
         this.setState({ postsList })
+        this.sortByDate()
     };
-
+    sortByDate() {
+        const postsList = [ ...this.state.postsList ]
+        postsList.sort((a, b) =>{
+            if(a.date < b.date) {
+                return 1
+            }
+            if(a.date > b.date) {
+                return -1
+            }
+            return 0;
+        });
+        this.setState({postsList})
+    }   
     render() {
         return (
             <ul className="Posts">

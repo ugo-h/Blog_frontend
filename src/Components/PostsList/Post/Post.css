@@ -1,5 +1,6 @@
 .Post-preview{
-    width: 30%;
+    padding:1rem;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-flow: column;
@@ -17,4 +18,8 @@
 }
 .Post-preview__link:hover {
     color:orange;
+}
+.Post{
+    padding:1rem;
+    margin: 0 2rem;
 }

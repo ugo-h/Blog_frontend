@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './App.css';
 import Header from './Components/Header/Header';
 import SignUp from './routes/SignUp'
@@ -69,7 +69,7 @@ class App extends Component {
                 </RedirectWhenAuth>
               </Route>
               <Route path="/posts">
-                <Posts/>
+                <Posts isAuth={this.state.userToken}/>
               </Route>
               <Route path="/">
                 <Home/>

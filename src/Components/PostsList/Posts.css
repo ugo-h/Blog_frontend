@@ -2,5 +2,7 @@
     padding: 1rem;
     list-style: none;
     display: flex;
-    justify-content: space-evenly;
+    flex-flow: column;
+    align-items: flex-start;
+    /* justify-content: space-evenly; */
 }

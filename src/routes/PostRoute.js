@@ -6,8 +6,8 @@ import Post from '../Components/PostsList/Post/Post';
 function PostRoute(props) {
     const { postId } = useParams();
     return([
-        <Link to="/posts">Back to the posts list</Link>,
-        <Post id={postId}/>
+        <Link to="/posts" key="1">Back to the posts list</Link>,
+        <Post key="2" id={postId}/>
     ])
 }
 
