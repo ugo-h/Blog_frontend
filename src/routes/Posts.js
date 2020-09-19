@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route, Link, useRouteMatch } from 'react-router-dom';
-import PostsList from '../Components/Posts/Posts';
+import PostsList from '../Components/PostsList/PostsList';
 import PostRoute from './PostRoute';
-import Protected from '../Helper/Protected';
+// import { Protected } from '../Helper/Protected';
 
 function Posts(props) { 
     let match = useRouteMatch();
@@ -11,9 +11,9 @@ function Posts(props) {
         <main>
         <Switch>
             <Route path={`${match.path}/new`}>
-                <Protected isAuthenticated={props.userToken}>
+            
                     <h1>Create new Post</h1>
-                </Protected>
+                
             </Route>
             <Route path={`${match.path}/:postId`}>
                 <PostRoute/>

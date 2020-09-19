@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import './App.css';
 import Header from './Components/Header/Header';
-import SignUp from './Containers/Form/SignUp/SignUp';
-import SignIn from './Containers/Form/SignIn/SIgnIn'; 
+import SignUp from './routes/SignUp'
+import SignIn from './routes/SignIn';
+import SignOut from './routes/SignOut'; 
 import Posts from './routes/Posts';
 import Home from './routes/Home';
-import Protected from './Helper/Protected';
+import { Protected, RedirectWhenAuth } from './Helper/Protected';
 
 class App extends Component {
   state = {
-    userToken: null
+    userToken: ''
   }
 
   componentDidMount() {
     const userToken = localStorage.getItem('userToken');
     // this.updateAuthStateHandler(userToken);
     this.setState({ userToken })
+    console.log(this.state.userToken)
   }
 
   updateAuthStateHandler(userToken) {
@@ -29,44 +31,45 @@ class App extends Component {
     this.setState({ user });
   }
 
-  logInHandler(userToken) {
+  signInHandler(userToken) {
     localStorage.setItem('userToken', userToken);
-    this.setState({ userToken })
+    this.setState({ userToken });
   }
   logOutHandler() {
-    localStorage.setItem('userToken', null);
+    localStorage.setItem('userToken', '');
     // this.updateAuthStateHandler('');
-    this.setState({ userToken: null })
+    this.setState({ userToken: '' })
   }
 
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-        <Header signOutHandler={this.logOutHandler.bind(this)} isAuthenticated={this.state.userToken}/>
+        <Header isAuth={this.state.userToken} signOutHandler={this.logOutHandler.bind(this)}/>
+        <h2>{this.state.userToken?'Hello, user122':'You are not logged in'}</h2>
           <Switch>
             <Route path="/signout">
-                  <Redirect to="/"/>
+              <Protected isAuth = {this.state.userToken}>
+                  <SignOut signOutHandler={this.logOutHandler.bind(this)}/>
+                </Protected>
               </Route>
               <Route path="/signup">
-                <Protected isAuthenticated={this.state.userToken}>
+                <RedirectWhenAuth isAuth={this.state.userToken}>
                   <SignUp
                     fields={['email', 'password', 'password confirmation']}
                     route='signup'
                   />
-                  </Protected>
+                </RedirectWhenAuth>
               </Route>
               <Route path="/signin">
-                  <Protected isAuthenticated={this.state.userToken}>
-                    <SignIn
-                    fields={['email', 'password']}
-                    route='signin'
-                    signInHandler={ this.logInHandler.bind(this) }
+                <RedirectWhenAuth isAuth={this.state.userToken}>
+                    <SignIn                    
+                      signInHandler={ this.signInHandler.bind(this) }
                     />
-                  </Protected>
+                </RedirectWhenAuth>
               </Route>
               <Route path="/posts">
-                <Posts userToken={this.state.userToken}/>
+                <Posts/>
               </Route>
               <Route path="/">
                 <Home/>

@@ -20,7 +20,7 @@ const header = (props) => (
                     <Link to="/signup">Sign Up</Link>
                 </li> */}
                 <li className="Header__nav__el">
-                    {props.isAuthenticated?<Link to="/signout" onClick={()=>props.signOutHandler()}>Sign Out</Link>:<Link to="/signin">Sign In</Link>}
+                    {props.isAuth?<Link to="/signout">Sign Out</Link>:<Link to="/signin">Sign In</Link>}
                 </li>
             </ul>
         </nav>

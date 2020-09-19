@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Post from '../Components/Posts/Post/Post';
+import Post from '../Components/PostsList/Post/Post';
 
 function PostRoute(props) {
     const { postId } = useParams();

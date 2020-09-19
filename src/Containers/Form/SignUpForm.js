@@ -1,5 +1,4 @@
-import FormTemplate from '../FormTemplate';
-import './SignUp.css';
+import FormTemplate from './FormTemplate/FormTemplate';
 
 class SignUp extends FormTemplate {
     

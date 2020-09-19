@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SignForm.css';
 
 class FormTemplate extends Component {
     constructor(props) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Posts from '../Components/Posts/Posts';
+import Posts from '../Components/PostsList/PostsList';
 
 const home = (props) => (
     <main>

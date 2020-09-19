@@ -1,5 +1,4 @@
-import FormTemplate from '../FormTemplate';
-import '../SignForm.css';
+import FormTemplate from './FormTemplate/FormTemplate';
 
 class SignIn extends FormTemplate {
 
@@ -11,7 +10,7 @@ class SignIn extends FormTemplate {
     
     processResponse(res, body) {
         const userToken = body.token;
-        console.log(userToken);
+        // console.log(this.props);
         this.props.signInHandler(userToken);
 
     }
