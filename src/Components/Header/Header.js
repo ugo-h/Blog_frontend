@@ -16,11 +16,11 @@ const header = (props) => (
         </nav>
         <nav className="Header__nav--right">
             <ul>
-                 <li className="Header__nav__el">
+                 {/* <li className="Header__nav__el">
                     <Link to="/signup">Sign Up</Link>
-                </li>
+                </li> */}
                 <li className="Header__nav__el">
-                    <Link to="/signin">Sign In</Link>
+                    {props.isAuthenticated?<Link to="/signout" onClick={()=>props.signOutHandler()}>Sign Out</Link>:<Link to="/signin">Sign In</Link>}
                 </li>
             </ul>
         </nav>

@@ -11,8 +11,9 @@ class SignIn extends FormTemplate {
     
     processResponse(res, body) {
         const userToken = body.token;
-        localStorage.setItem('userToken', userToken)
         console.log(userToken);
+        this.props.signInHandler(userToken);
+
     }
     
 }
