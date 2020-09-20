@@ -15,6 +15,9 @@ import { Protected, RedirectWhenAuth } from './Helper/Protected';
 //FUNCTION BASED
 //FETCH ON USEEFFECT WITCH CALLBACK FROM APP AND SAVE
 //IN THE STATE OF APP COMPONENT
+//Or not
+//beacuse App component can become god class
+//which is a bad practice
 class App extends Component {
   state = {
     userToken: ''
@@ -74,11 +77,11 @@ class App extends Component {
                     />
                 </RedirectWhenAuth>
               </Route>
+              <Route path="/tags">
+                <Tags/>
+              </Route>
               <Route path="/posts">
                 <Posts isAuth={this.state.userToken}/>
-              </Route>
-              <Route>
-                <Tags/>
               </Route>
               <Route path="/">
                 <Home/>
