@@ -18,6 +18,7 @@ import { Protected, RedirectWhenAuth } from './Helper/Protected';
 //Or not
 //beacuse App component can become god class
 //which is a bad practice
+//WHY TWO POSTS ARE BEING CREATED??????
 class App extends Component {
   state = {
     userToken: ''

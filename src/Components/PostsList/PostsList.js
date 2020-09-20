@@ -36,6 +36,7 @@ class Posts extends Component {
                         title={post.title} 
                         author={post.author}
                         date={post.date}
+                        tags={post.tags}
                         content={post.content}/>
                     ))}
             </ul>

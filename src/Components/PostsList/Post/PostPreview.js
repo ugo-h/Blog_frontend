@@ -1,12 +1,14 @@
 import React from 'react';
 import './Post.css';
 import { Link } from 'react-router-dom';
+import TagsList from '../../TagsList/TagList';
 
 const PostPreview = (props) => {
     return(
         <li className="Post-preview">
             <h2 className="Post-preview__title">{ props.title }</h2>
             <div className="Post-preview__header">
+                <TagsList tags={props.tags}/>
                 <h3 className="Post-preview__header__subtitle">{ props.author }</h3>
                 <span className="Post-preview__header__subtitle">{ new Date(props.date).toDateString() }</span>
             </div>

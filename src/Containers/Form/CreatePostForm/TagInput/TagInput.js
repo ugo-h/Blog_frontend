@@ -7,49 +7,45 @@ import './TagInput.css';
 //function removeTags
 //в props
 class TagInput extends Component {
-    state = {
-        tags:[],
-        tagField: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            tagField: ''
+        };
+    }
+    
     inputChangeHandler(ev) {
-        const tags = [...this.state.tags];
         let tagField = ev.target.value;
-      
-        this.setState({ tagField, tags });
+        this.setState({ tagField });
     }
     keyHandler(ev) {
         //remove tag on Backspace
         // --remove in setTimeout
         //  to allow animation play
-        if(ev.key=== 'Backspace'&& !this.state.tagField) {
-            const tags = [...this.state.tags];
-            tags.pop();
-            this.setState({ tags })
+        if(ev.key=== 'Backspace'&& !this.state.tagField.trim()) {
+            this.props.removeTag();
         //create tag on Enter
         //--maybe also create tags with animation to provide smooth fetching
-        }else if(ev.key==='Enter' &&this.state.tagField){            
+        }else if(ev.key===' ' &&this.state.tagField.trim()){            
             let tagField = this.state.tagField;
-            const tags = [...this.state.tags]; 
-            tags.push(tagField);
+            this.props.addTag(tagField )
             tagField = '';
-            this.setState({ tags, tagField })
+            this.setState({ tagField })
         }
     }
     render() {
         return(
             <div>
-                {/* <div className="input-container"> */}
-                    <ul className="Tag-array">
-                        {this.state.tags.map((tag, index) => <li className="Tag-array__element" key={index}>{ tag }<X/></li>)}
-                        {/* <div className="Tag__input">a</div> */}
-                        <input className="Tag__input" 
-                        size="1"
-                        value={this.state.tagField} 
-                        onChange={this.inputChangeHandler.bind(this)}
-                        onKeyDown={this.keyHandler.bind(this)}
-                        />
-                    </ul>
-                {/* </div> */}
+                <ul className="Tag-array">
+                    {this.props.tagsArray.map((tag, index) => <li className="Tag-array__element" key={index}>{ tag }<X/></li>)}
+                    {/* <div className="Tag__input">a</div> */}
+                    <input className="Tag__input" 
+                    size="1"
+                    value={this.state.tagField} 
+                    onChange={this.inputChangeHandler.bind(this)}
+                    onKeyDown={this.keyHandler.bind(this)}
+                    />
+                </ul>
             </div>
         )
     }

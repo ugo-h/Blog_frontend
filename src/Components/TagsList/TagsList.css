@@ -1,0 +1,20 @@
+.TagsList{
+    padding:0;
+    display: flex;
+    list-style: none;
+}
+.TagsList__element{
+    font-size: 0.7rem;
+    margin-left: 3rem;
+    color:inherit;
+    text-decoration: none;
+    background:#ccc;
+    border-radius: 20px;
+    padding: 0.2rem 0.5rem;
+}
+.TagsList__element a{
+    width: 100%;
+    height:100%;
+    color: inherit;
+    text-decoration: none;
+}

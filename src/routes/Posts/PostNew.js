@@ -6,7 +6,7 @@ const PostNew = (props) => {
         <div>
             <h1>Create new Post</h1>
             <CreatrPostForm
-                fields={{'title':'text', 'content':'textarea'}}
+                fields={{'tags':'tagInput', 'title':'text', 'content':'textarea'}}
                 route="posts/create"
                 userToken={props.userToken}
             />

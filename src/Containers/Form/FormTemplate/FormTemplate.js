@@ -4,39 +4,44 @@ import './SignForm.css';
 class FormTemplate extends Component {
     constructor(props) {
         super(props);
-        const emptyFields = this.createEmptyFieldsFromProps();
-        const errors =  this.createEmptyFieldsFromProps();
+        const emptyFields = this._createEmptyFieldsFromProps();
+        const errors =  this._createEmptyFieldsFromProps();
         this.state = { ...emptyFields, errors };
-        console.log(this.state);
     }
     
-    createEmptyFieldsFromProps() {
+    _createEmptyFieldsFromProps() {
         const emptyFields = {};
         for(const fieldName in this.props.fields) {
             emptyFields[fieldName] = '';
         }
         return emptyFields;
     }
-    async submitHandler(ev) {
+    async _submitHandler(ev) {
         ev.preventDefault();
-        const data = {}
-        for(const fieldKey in this.props.fields) {
-            data[fieldKey] = this.state[fieldKey];
-        }
-        //set empty strings to errors and to all fields
-        const emptyFields = this.createEmptyFieldsFromProps();
-        this.setState({errors: emptyFields})
-        this.setState({...emptyFields});
-
+        const data = this.getRequestDataFromFields();
+        this.clearAllFieldsAndErrors()
         const res = await this.sendPostRequest(data, this.props.route);
         const body = await res.json();
 
-        if(this.hasErrorsResponse(body)) {
+        if(this._hasErrorsResponse(body)) {
             this.displayErrors(body);
             return;
         }
         this.processResponse(res, body);
     };
+    getRequestDataFromFields() {
+        const data = {}
+        for(const fieldKey in this.props.fields) {
+            data[fieldKey] = this.state[fieldKey];
+        }
+        return data; 
+    }
+    clearAllFieldsAndErrors() {
+        //set empty strings to errors and to all fields
+        const emptyFields = this._createEmptyFieldsFromProps();
+        this.setState({errors: emptyFields})
+        this.setState({...emptyFields});
+    }
     async sendPostRequest(data, route) {
         const res = await fetch(`http://localhost:5000/${route}`, {
                   method: 'POST',
@@ -48,7 +53,7 @@ class FormTemplate extends Component {
         return res;
       }
       
-    hasErrorsResponse(body) {
+    _hasErrorsResponse(body) {
         return !!body['errors'];
         
     }
@@ -73,7 +78,7 @@ class FormTemplate extends Component {
         this.setState({ [name]:value });
     }
 
-    getInput(type, field) {
+    getInputDependingOnType(type, field) {
         if(type==='textarea') {
             return(
                 <textarea 
@@ -84,7 +89,7 @@ class FormTemplate extends Component {
             )
         } else {
             return(
-                <input 
+                <input className="SignForm__input"
                 type={type}
                 value={this.state[field]}
                 name={field}
@@ -94,14 +99,14 @@ class FormTemplate extends Component {
         }
     }
 
-    renderFields() {
+    _renderFields() {
         const render = [];
         let index = 0;
         for(const field in this.props.fields) {
             render.push(
             <label key={index}>
                 {field}
-                {this.getInput(this.props.fields[field], field)}
+                {this.getInputDependingOnType(this.props.fields[field], field)}
                 <span className="form__error">
                     {this.state.errors[field]}
                 </span>
@@ -113,9 +118,9 @@ class FormTemplate extends Component {
     }
     render() {
         return(
-            <form className="SignForm" onSubmit={this.submitHandler.bind(this)}>
-                {this.renderFields()}
-                <input  type="submit" value="submit"/>
+            <form className="SignForm" onSubmit={this._submitHandler.bind(this)}>
+                {this._renderFields()}
+                <input className="SignForm__button" type="submit" value="submit"/>
             </form>
             
         )
