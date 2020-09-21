@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './TagCloud.css';
+import TagList from '../../Components/TagsList/TagList';
 
 class TagCloud extends Component{
     state = {
@@ -7,14 +9,17 @@ class TagCloud extends Component{
     async componentDidMount() {
         const res = await fetch('http://localhost:5000/tags');
         const body = await res.json();
-        
-        this.setState({cloud: body});
+        const tagNames = [];
+        body.forEach((tag) => {
+            tagNames.push(tag.name)
+        })
+        this.setState({cloud: tagNames});
     }
 
     render() {
      return(
-         <div>
-             {this.state.cloud.map((tag, index) => <div key={index}>{tag.name}</div>)}
+         <div className="Tag-cloud">
+            <TagList tags={this.state.cloud}/>
          </div>
      )   
     }

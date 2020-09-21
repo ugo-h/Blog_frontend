@@ -19,6 +19,7 @@ import { Protected, RedirectWhenAuth } from './Helper/Protected';
 //beacuse App component can become god class
 //which is a bad practice
 //WHY TWO POSTS ARE BEING CREATED??????
+//TAGS ARE NOT CREATED ON BACKEND WHY?
 class App extends Component {
   state = {
     userToken: ''

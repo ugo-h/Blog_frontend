@@ -36,8 +36,9 @@ class CreatePostForm extends FormTemplate {
       }
       removeTag() {
         const tagsArray = [...this.state.tagsArray];
-        tagsArray.pop()
+        const tag = tagsArray.pop()
         this.setState({ tagsArray })
+        return tag;
       }
 
       getInputDependingOnType(type, field) {
@@ -52,6 +53,7 @@ class CreatePostForm extends FormTemplate {
         } else if(type==='tagInput') {
             return(
                 <TagInput 
+                    userToken={this.props.userToken}
                     tagsArray={this.state.tagsArray}
                     value={this.state[field]}
                     name={field}

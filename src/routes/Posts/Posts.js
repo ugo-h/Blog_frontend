@@ -7,7 +7,6 @@ import { Protected } from '../../Helper/Protected';
 
 function Posts(props) { 
     let match = useRouteMatch();
-    console.log(props)
     return(
         <main>
         <Switch>
