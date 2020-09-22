@@ -8,7 +8,7 @@ import { Protected } from '../../Helper/Protected';
 function Posts(props) { 
     let match = useRouteMatch();
     return(
-        <main>
+        <main className="Home">
         <Switch>
             <Route path={`${match.path}/new`}>
                 <Protected isAuth={props.isAuth}>

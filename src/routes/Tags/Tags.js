@@ -7,7 +7,7 @@ import Tag from './Tag';
 
 function Tags() {
     return(
-        <main>
+        <main className="Home">
             <Switch>
                
                 <Route path="/tags/:id"> 

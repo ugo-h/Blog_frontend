@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import SignInForm from '../../Containers/Form/SignInForm';
+import './Auth.css'
 
 const siginIn = (props) => {
     return (
-        <main>
+        <main className="Auth">
             <h1>Sign In</h1>
             <SignInForm
                 fields={{'email':'Email', 'password':'password'}}
