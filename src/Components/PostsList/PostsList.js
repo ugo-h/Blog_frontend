@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Posts.css';
 import PostPreview from './Post/PostPreview';
 import Paginate from '../../Helper/Paginator/Paginator';
+import Aux from '../../Helper/Auxillury';
 
 function createEqualSubarrays(arr, numOfElements) {
     const n = Math.ceil(arr.length/numOfElements);
@@ -20,7 +21,6 @@ function createEqualSubarrays(arr, numOfElements) {
 
 class Posts extends Component {
     state = {
-        postsList: [],
         postsSeparated: [[]],
         postsPerPage: 4,
         currentPage: 0
@@ -81,7 +81,8 @@ class Posts extends Component {
     }   
     render() {
         return (
-            [<ul className="Posts">
+            <Aux>
+            <ul className="Posts">
                 {this.state.postsSeparated[this.state.currentPage].map(post => (
                     <PostPreview 
                         key={post.id}
@@ -92,7 +93,7 @@ class Posts extends Component {
                         tags={post.tags}
                         content={post.content}/>
                     ))}
-            </ul>,
+            </ul>
             <Paginate
              pages={this.state.postsSeparated}
              currentPage={this.state.currentPage}
@@ -100,7 +101,7 @@ class Posts extends Component {
              goToPreviousPage={this.goToPreviousPage.bind(this)}
              goToPage={this.goToPage.bind(this)}
             />
-            ]
+            </Aux>
         )
     };
 };

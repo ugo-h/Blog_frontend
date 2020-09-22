@@ -12,6 +12,7 @@
     border: 1px solid #ccc;
     padding: 0.2rem;
     cursor: pointer;
+    margin: 0 0.1rem;
 }
 .Paginator__pages__el:active{
      background-color: blue;
@@ -26,6 +27,11 @@
     background: none;
     border: none;
     cursor: pointer;
+
+}
+.Paginator__pages__el[active="true"]{
+    background-color: rgb(200, 200, 200);
+    cursor: default;
 }
 .Paginator__btn{
     border: 1px solid #ccc;

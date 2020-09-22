@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PostPreview from '../../Components/PostsList/Post/PostPreview';
-
+import Aux from '../../Helper/Auxillury';
 
 class Tag extends Component {
     state = {
@@ -20,12 +20,12 @@ class Tag extends Component {
     };
     render() {
         return(
-            <div>
-                <h2>Posts with tag {this.state.id}</h2>
+            <Aux>
+                <h1>Posts with tag "{this.state.id}":</h1>
                 <ul>
                     {this.state.posts.map((post, index) => <PostPreview key={index} id={post.id} date={post.date} title={post.title} tags={post.tags} content={post.content} author={post.author}/>)}
                 </ul>
-            </div>
+            </Aux>
         )
     }
 }

@@ -4,16 +4,25 @@
     align-items: center;
 }
 body{
-    /* background: #ccc; */
+    background: #e3e4e6;
 }
+/* LAYOUT */
 main{
+    padding: 2rem 0;
     background: white;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    border: 1px solid #ccc;
     box-shadow: 0 7px 7px rgba(0, 0, 0, 0.1);
     display:flex;
     flex-flow:column;
     align-items: center;
     max-width: 700px;
+    /* max-width: 900px; */
     width:100%;
   }
+  
+main h1 {
+    padding:1rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #ccc;
+    width:80%;
+}
