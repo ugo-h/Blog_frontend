@@ -4,11 +4,12 @@ import TagCloud from "../../Containers/Tags/TagCloud";
 import Tag from './Tag';
 import Aux from '../../Helper/Auxillury';
 
+
 function Tags() {
     return(
         <Aux>
             <Switch>
-                
+               
                 <Route path="/tags/:id"> 
                     <Tag/>
                 </Route>

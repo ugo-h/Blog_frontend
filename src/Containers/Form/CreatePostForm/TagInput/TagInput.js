@@ -23,24 +23,17 @@ class TagInput extends Component {
         // --remove in setTimeout
         //  to allow animation play
         if(ev.key=== 'Backspace'&& !this.state.tagField.trim()) {
-            const tags = this.props.tagsArray;
-            const lastTag = tags[tags.length-1];
-            this.sendPostRequest({name: lastTag}, 'delete').then((res) => {
-                this.props.removeTag();
-            });
-            
+            this.props.removeTag();
         //create tag on Enter
         //--maybe also create tags with animation to provide smooth fetching
         } else if(ev.key==='Enter' && this.state.tagField.trim()){            
             let tagField = this.state.tagField;
-            this.sendPostRequest({name: tagField}, 'create').then((res) => {
-                res.json().then((body) => {
-                    console.log(body)
-                    this.props.addTag(tagField.toLocaleLowerCase());
-                    tagField = '';
-                    this.setState({ tagField });
-                })
-            })
+            if(!this.props.tagsArray.includes(tagField)) {
+                this.props.addTag(tagField.toLocaleLowerCase());
+            }
+            tagField = '';
+            this.setState({ tagField });
+        
             
         }
     }
@@ -60,8 +53,7 @@ class TagInput extends Component {
         return(
             <div>
                 <ul className="Tag-array">
-                    {this.props.tagsArray.map((tag, index) => <li className="Tag-array__element" key={index}>{ tag }<X/></li>)}
-                    {/* <div className="Tag__input">a</div> */}
+                    {this.props.tagsArray.map((tag, index) => <li className="Tag-array__element" key={index}>{ tag }<X click={this.props.removeTag}/></li>)}
                     <input className="Tag__input" 
                     form="none" 
                     size="1"

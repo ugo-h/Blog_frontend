@@ -1,0 +1,40 @@
+.Paginator{
+    display: flex;
+    align-items: center;
+}
+.Paginator__pages{
+    display: flex;
+    align-items: center;
+    padding:0;
+    list-style: none;
+}
+.Paginator__pages__el{
+    border: 1px solid #ccc;
+    padding: 0.2rem;
+    cursor: pointer;
+}
+.Paginator__pages__el:active{
+     background-color: blue;
+}
+.Paginator__pages__el:hover, .Paginator__btn:hover{
+    background: #ccc;
+    
+}
+.Paginator__pages__el button{
+    height:100%;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.Paginator__btn{
+    border: 1px solid #ccc;
+    padding: 0.3rem;
+    background: none;
+    cursor: pointer;
+
+}
+
+.Paginator *:focus{
+ outline:none;
+}

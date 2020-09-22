@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
 function SignOut(props) {
-    useEffect(() => {
+    useEffect((props) => {
         props.signOutHandler();
-    })
+    }, [])
     return (
        <Redirect to="/"/>
     )
