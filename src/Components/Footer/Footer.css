@@ -1,0 +1,14 @@
+.Footer{
+    margin-top: 5rem;
+    background: rgb(40, 40, 40);
+    color: white;
+    width: 100%;
+    display: flex;
+    align-items:  center;
+    justify-content: center;
+    height: 15vh;
+}
+.Footer ul{
+    padding: 0;
+    list-style: none;
+}

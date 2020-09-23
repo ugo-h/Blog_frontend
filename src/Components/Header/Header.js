@@ -10,18 +10,12 @@ const header = (props) => (
                     <Link to="/">Home</Link>
                 </li>
                 <li className="Header__nav__el">
-                    <Link to="/posts">Posts</Link>
-                </li>
-                <li className="Header__nav__el">
                     <Link to="/tags">Tags</Link>
                 </li>
             </ul>
         </nav>
         <nav className="Header__nav--right">
             <ul>
-                 {/* <li className="Header__nav__el">
-                    <Link to="/signup">Sign Up</Link>
-                </li> */}
                 <li className="Header__nav__el">
                     {props.isAuth?<Link to="/signout">Sign Out</Link>:<Link to="/signin">Sign In</Link>}
                 </li>

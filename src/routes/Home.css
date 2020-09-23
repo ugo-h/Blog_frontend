@@ -10,3 +10,23 @@
     max-width: 900px;
     width:100%;
 }
+.Home__header{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 4rem;
+
+}
+.Home__header__title{
+    border: none;
+    margin:0 ;
+}
+.Call-to-action-btn{
+  
+    align-self: center;
+    background: orange;
+    padding: 1rem;
+    color: white;
+    text-decoration: none;
+}

@@ -7,7 +7,8 @@ import SignIn from './routes/Auth/SignIn';
 import SignOut from './routes/Auth/SignOut'; 
 import Posts from './routes/Posts/Posts';
 import Home from './routes/Home';
-import Tags from './routes/Tags/Tags'
+import Tags from './routes/Tags/Tags';
+import Footer from './Components/Footer/Footer';
 import { Protected, RedirectWhenAuth } from './Helper/Protected';
 
 //MAKE EVERYthINg EXCEPT PAGES OF SINGLE ELEMENTS (Post page,
@@ -86,9 +87,10 @@ class App extends Component {
                 <Posts isAuth={this.state.userToken}/>
               </Route>
               <Route path="/">
-                <Home/>
+                <Home isAuth={this.state.userToken}/>
               </Route>            
           </Switch>
+          <Footer/>
         </div>
       </BrowserRouter>
     );
