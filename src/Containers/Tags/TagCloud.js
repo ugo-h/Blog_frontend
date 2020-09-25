@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './TagCloud.css';
 import TagList from '../../Components/TagsList/TagList';
+import Spinner from '../../Components/Spinner/Spinner';
 
 class TagCloud extends Component{
     state = {
         cloud:[],
-        isLoading: false
+        isLoading: true
     };
     async componentDidMount() {
         const res = await fetch('http://localhost:5000/tags');
@@ -14,13 +15,18 @@ class TagCloud extends Component{
         body.forEach((tag) => {
             tagNames.push(tag.name)
         })
-        this.setState({cloud: tagNames});
+        const isLoading = false;
+        this.setState({ cloud: tagNames, isLoading });
     }
 
     render() {
+        const isLoading = this.state.isLoading;
      return(
          <div className="Tag-cloud">
-            <TagList tags={this.state.cloud}/>
+             {
+                isLoading?<Spinner/> :
+                <TagList tags={this.state.cloud}/>
+             }
          </div>
      )   
     }

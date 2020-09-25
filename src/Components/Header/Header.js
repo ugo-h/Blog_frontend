@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import './Header.css';
+import Aux from '../../Helper/Auxillury';
 
 const header = (props) => (
     <header className="Header">
@@ -16,9 +17,20 @@ const header = (props) => (
         </nav>
         <nav className="Header__nav--right">
             <ul>
-                <li className="Header__nav__el">
-                    {props.isAuth?<Link to="/signout">Sign Out</Link>:<Link to="/signin">Sign In</Link>}
-                </li>
+                
+                    {props.isAuth?
+                    <li className="Header__nav__el">
+                    <Link to="/signout">Sign Out</Link>
+                    </li>
+                    :<Aux>
+                        <li className="Header__nav__el">
+                        <Link to="/signin">Sign In</Link>
+                        </li>
+                        <li className="Header__nav__el">
+                        <Link className="Header__nav__btn" to="/signup">Sign Up</Link>
+                        </li>                       
+                    </Aux>}
+                
             </ul>
         </nav>
     </header>
