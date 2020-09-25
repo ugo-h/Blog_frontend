@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import TagCloud from "../../Containers/Tags/TagCloud";
-import Tag from './Tag';
+import Tag from '../../Containers/Tag/Tag';
 
 
 
@@ -10,7 +10,7 @@ function Tags() {
         <main className="Home">
             <Switch>
                
-                <Route path="/tags/:id"> 
+                <Route path="/tags/:tagname"> 
                     <Tag/>
                 </Route>
                 <Route path="/tags">

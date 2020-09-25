@@ -15,7 +15,7 @@ function Posts(props) {
                 </Protected>   
             </Route>
             <Route path={`${match.path}/:postId`}>
-                <PostRoute/>
+                <PostRoute userToken={props.isAuth}/>
             </Route>
         </Switch>
     </main>

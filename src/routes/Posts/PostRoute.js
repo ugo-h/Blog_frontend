@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Post from '../../Components/PostsList/Post/Post';
+import Post from '../../Containers/Post/Post';
 
 function PostRoute(props) {
     const { postId } = useParams();
     return(
-        <Post key="2" id={postId}/>
+        <Post userToken={props.userToken} key="2" id={postId}/>
     )
 }
 

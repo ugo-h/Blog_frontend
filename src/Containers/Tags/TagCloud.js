@@ -4,8 +4,9 @@ import TagList from '../../Components/TagsList/TagList';
 
 class TagCloud extends Component{
     state = {
-        cloud:[]
-    }
+        cloud:[],
+        isLoading: false
+    };
     async componentDidMount() {
         const res = await fetch('http://localhost:5000/tags');
         const body = await res.json();

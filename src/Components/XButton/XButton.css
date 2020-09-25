@@ -9,7 +9,8 @@
     font-size: 0.5rem;
 }
 .X-btn:hover{
-    background-color: rgba(200, 100, 0, 0.7);
+    background-color: orange;
+    color: white;
 }
 .X-btn:focus {
     outline:none;

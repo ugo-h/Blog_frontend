@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Posts from '../Components/PostsList/PostsList';
+import Posts from '../Containers/Posts/Posts';
 import './Home.css'
 
 const home = (props) => (

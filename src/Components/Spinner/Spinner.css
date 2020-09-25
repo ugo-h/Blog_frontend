@@ -1,0 +1,36 @@
+.Spinner::before, .Spinner--sm::before, .Spinner--lg::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    margin-left: -15px;
+    border-radius: 50%;
+    border: 1.5px solid lightgray;
+    border-top-color: orange;
+    animation: spinner 0.7s  linear infinite;
+}
+
+.Spinner--sm::before{
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    margin-left: -8px;
+    border: 1px solid lightgray;
+    border-top-color: orange;
+}
+.Spinner--lg::before{
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
+    border: 3px solid lightgray;
+    border-top-color: orange;
+}
+@keyframes spinner {
+    to{
+        transform: rotate(360deg)
+    }
+}

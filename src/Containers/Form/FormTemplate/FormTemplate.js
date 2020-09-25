@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './SignForm.css';
+import Spinner from '../../../Components/Spinner/Spinner';
 
 class FormTemplate extends Component {
     constructor(props) {
         super(props);
         const emptyFields = this._createEmptyFieldsFromProps();
         const errors =  this._createEmptyFieldsFromProps();
-        this.state = { ...emptyFields, errors };
+        this.state = { ...emptyFields, errors, isLoading: false };
     }
     
     _createEmptyFieldsFromProps() {
@@ -18,16 +19,18 @@ class FormTemplate extends Component {
     }
     async _submitHandler(ev) {
         ev.preventDefault();
+        this.setState({isLoading: true});
         const data = this.getRequestDataFromFields();
         this.clearAllFieldsAndErrors()
         const res = await this.sendPostRequest(data, this.props.route);
         const body = await res.json();
-
+        this.setState({isLoading: false});
         if(this._hasErrorsResponse(body)) {
             this.displayErrors(body);
             return;
         }
         this.processResponse(res, body);
+        
     };
     getRequestDataFromFields() {
         const data = {}
@@ -121,6 +124,7 @@ class FormTemplate extends Component {
             <form className="SignForm" onSubmit={this._submitHandler.bind(this)}>
                 {this._renderFields()}
                 <input className="SignForm__button" type="submit" value="submit"/>
+                <span className="SignForm__loader-container">{this.state.isLoading? <Spinner size="small"/>:''}</span>
             </form>
             
         )

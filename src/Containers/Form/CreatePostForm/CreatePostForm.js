@@ -1,6 +1,7 @@
 import React from 'react';
 import TagInput from './TagInput/TagInput';
 import FormTemplate from '../FormTemplate/FormTemplate';
+import { withRouter } from 'react-router-dom';
 
 class CreatePostForm extends FormTemplate {
     constructor(props) {
@@ -8,7 +9,8 @@ class CreatePostForm extends FormTemplate {
         this.state.tagsArray = [];
     }
     processResponse(res, body) {
-        // console.log(body);
+        console.log('redirecting');
+        this.props.history.push('/')
     }
     async sendPostRequest(data, route) {
         const res = await fetch(`http://localhost:5000/${route}`, {
@@ -75,4 +77,4 @@ class CreatePostForm extends FormTemplate {
 
 }
 
-export default CreatePostForm;
+export default withRouter(CreatePostForm);
