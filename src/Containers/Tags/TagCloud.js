@@ -6,10 +6,17 @@ import Spinner from '../../Components/Spinner/Spinner';
 class TagCloud extends Component{
     state = {
         cloud:[],
-        isLoading: true
+        isLoading: true,
+        isLoadedSuccessfully: true
     };
     async componentDidMount() {
-        const res = await fetch('http://localhost:5000/tags');
+        let res;
+        try{
+            res = await fetch('http://localhost:5000/api/tags');
+        } catch(error) {
+            this.setState({ isLoading: false, isLoadedSuccessfully: false });
+            return;
+        }
         const body = await res.json();
         const tagNames = [];
         body.forEach((tag) => {
@@ -21,8 +28,10 @@ class TagCloud extends Component{
 
     render() {
         const isLoading = this.state.isLoading;
+        const isLoadedSuccessfully = this.state.isLoadedSuccessfully;
      return(
          <div className="Tag-cloud">
+             {isLoadedSuccessfully? '': 'Sorry, the server is unavailable. Please, try agan later.'}
              {
                 isLoading?<Spinner/> :
                 <TagList tags={this.state.cloud}/>

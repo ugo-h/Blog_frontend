@@ -15,7 +15,7 @@ class Tag extends Component {
         this.fetchData(tagname);
     };
     async fetchData(tagname) {
-        const res = await fetch('http://localhost:5000/posts');
+        const res = await fetch('http://localhost:5000/api/posts');
         const posts = await res.json();
         console.log(posts)
         const postsWithTag = posts.filter(post => post.tags.find(tag => tag===tagname))

@@ -1,4 +1,4 @@
-
+//IMPLEMENT SLIDING WINDOWS
 function createEqualSubarrays(arr, numOfElements) {
     const n = Math.ceil(arr.length/numOfElements);
     const newArr = [];

@@ -4,7 +4,7 @@ import TagsList from '../../Components/TagsList/TagList';
 import Spinner from '../../Components/Spinner/Spinner';
 import Aux from '../../Helper/Auxillury';
 import './Post.css';
-//TURN STATELESS!!!!BUT I CAN NOT1111
+
 class Post extends Component {
     state = {
         title: '',
@@ -16,7 +16,7 @@ class Post extends Component {
     
     async componentDidMount() {
         const id = this.props.id;
-        const res = await fetch('http://localhost:5000/posts/' + id);
+        const res = await fetch('http://localhost:5000/api/posts/' + id);
         const postInfo = await res.json();
 
         const { title , content, author, date, tags } = postInfo;

@@ -12,15 +12,22 @@ class Posts extends Component {
         postsSeparated: [[]],
         postsPerPage: 4,
         currentPage: 0,
-        isLoading: true
+        isLoading: true,
+        isLoadedSuccessfully: true
     };
     async componentDidMount() {
-        const res = await fetch('http://localhost:5000/posts');
+        let res;
+        try{
+            res = await fetch('http://localhost:5000/api/posts');
+        } catch(error){
+            this.setState({ isLoadedSuccessfully:false, isLoading: false })
+            return;
+        }
+        console.log(res.status)
         const data = await res.json();
         if(!data) {
             return;
         }
-        console.log(data);
         const postsSorted = sortByDate(data)
         const postsSeparated = this.separatePostsPerPages(postsSorted);
         this.setState({ postsSeparated, isLoading: false })
@@ -65,8 +72,12 @@ class Posts extends Component {
     render() {
         const isLoading = this.state.isLoading;
         const hasPosts = !!this.state.postsSeparated[this.state.currentPage];
+        const isLoadedSuccessfully = this.state.isLoadedSuccessfully;
         return (
             <Aux>
+                {
+                    isLoadedSuccessfully? '': 'Sorry, the server is unavailable. Please, try agan later.'
+                }
                 {
                     isLoading? 
                     <Spinner /> :

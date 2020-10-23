@@ -7,7 +7,7 @@ class FormTemplate extends Component {
         super(props);
         const emptyFields = this._createEmptyFieldsFromProps();
         const errors =  this._createEmptyFieldsFromProps();
-        this.state = { ...emptyFields, errors, isLoading: false };
+        this.state = { ...emptyFields, errors, isLoading: false, isLoadedSucsessfully: true };
     }
     
     _createEmptyFieldsFromProps() {
@@ -22,7 +22,13 @@ class FormTemplate extends Component {
         this.setState({isLoading: true});
         const data = this.getRequestDataFromFields();
         this.clearAllFieldsAndErrors()
-        const res = await this.sendPostRequest(data, this.props.route);
+        let res;
+        try{
+            res = await this.sendPostRequest(data, this.props.route);
+        } catch(error) {
+            this.setState({isLoading: false, isLoadedSucsessfully: false});
+            return;
+        }
         const body = await res.json();
         this.setState({isLoading: false});
         if(this._hasErrorsResponse(body)) {
@@ -124,7 +130,10 @@ class FormTemplate extends Component {
             <form className="SignForm" onSubmit={this._submitHandler.bind(this)}>
                 {this._renderFields()}
                 <input className="SignForm__button" type="submit" value="submit"/>
-                <span className="SignForm__loader-container">{this.state.isLoading? <Spinner size="small"/>:''}</span>
+                <span className="SignForm__loader-container">
+                    {this.state.isLoading? <Spinner size="small"/>:''}
+                    {this.state.isLoadedSucsessfully? '': 'Sorry, the server is unavailable. Please, try agan later.'}
+                </span>
             </form>
             
         )
