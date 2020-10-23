@@ -1,7 +1,11 @@
+import React from 'react';
 import FormTemplate from './FormTemplate/FormTemplate';
 
-class SignUp extends FormTemplate {
-    
-}
+const signUp = () => (
+    <FormTemplate 
+        fields={{'name':'', 'email':'Email', 'password':'password', 'passwordConfirmation': 'password'}}
+        route="signup"
+    />
+)
 
-export default SignUp;
+export default signUp;

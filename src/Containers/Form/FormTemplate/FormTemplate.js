@@ -35,7 +35,7 @@ class FormTemplate extends Component {
             this.displayErrors(body);
             return;
         }
-        this.processResponse(res, body);
+        if(this.props.processResponse) this.props.processResponse(res, body);
         
     };
     getRequestDataFromFields() {
@@ -75,10 +75,7 @@ class FormTemplate extends Component {
         }
         this.setState({errors});
     }
-    processResponse(res, body) {
-
-    }
-  
+ 
     inputChangeHandler(ev) {
         const target = ev.target;
         const name = target.name;
@@ -129,6 +126,7 @@ class FormTemplate extends Component {
         return(
             <form className="SignForm" onSubmit={this._submitHandler.bind(this)}>
                 {this._renderFields()}
+
                 <input className="SignForm__button" type="submit" value="submit"/>
                 <span className="SignForm__loader-container">
                     {this.state.isLoading? <Spinner size="small"/>:''}

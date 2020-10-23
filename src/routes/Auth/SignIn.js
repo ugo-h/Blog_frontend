@@ -8,8 +8,6 @@ const siginIn = (props) => {
         <main className="Auth">
             <h1>Sign In</h1>
             <SignInForm
-                fields={{'email':'Email', 'password':'password'}}
-                route='signin'
                 signInHandler={props.signInHandler}
             />
             <p>Do not have an account? <Link to="/signup">join Us!</Link></p>
