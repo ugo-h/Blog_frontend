@@ -1,5 +1,5 @@
 import React from 'react';
-// import './Post.css';
+import './PostPreview.css';
 import { Link } from 'react-router-dom';
 import TagsList from '../../TagsList/TagList';
 

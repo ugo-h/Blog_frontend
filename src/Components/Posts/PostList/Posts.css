@@ -1,9 +1,9 @@
 .Posts{
-    width:70%;
+    width:100%;
     padding: 1rem;
     list-style: none;
     display: flex;
     flex-flow: column;
-    align-items: flex-start;
+    align-items: center;
     /* justify-content: space-evenly; */
 }

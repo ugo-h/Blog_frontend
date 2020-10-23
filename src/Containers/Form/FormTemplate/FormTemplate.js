@@ -24,7 +24,7 @@ class FormTemplate extends Component {
         this.clearAllFieldsAndErrors()
         let res;
         try{
-            res = await this.sendPostRequest(data, this.props.route);
+            res = await this.sendPostRequest(data, `api/${this.props.route}`);
         } catch(error) {
             this.setState({isLoading: false, isLoadedSucsessfully: false});
             return;

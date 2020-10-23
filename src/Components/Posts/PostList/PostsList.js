@@ -6,6 +6,7 @@ const postsList = ({ posts }) => {
         <ul className="Posts">
             {posts.map(post => (
                 <PostPreview
+                    key={post._id}
                     title={post.title}
                     tags={post.tags}
                     content={post.content}

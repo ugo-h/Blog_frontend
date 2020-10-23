@@ -1,0 +1,27 @@
+.Post-preview{
+    padding:1rem;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 4rem;
+    border-bottom: solid rgba(200, 200, 200, 0.5) 1px;
+}
+.Post-preview__title {
+    font-family: 'Times New Roman', Times, serif;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin: 0;
+}
+.Post-preview__link{
+    
+    text-decoration: none;
+    color:  white;
+    margin-right: 1rem;
+    align-self: flex-end;
+    background: rgb(80, 80, 80);
+    padding: 0.5rem;
+}
+.Post-preview__link:hover {
+    background:orange;
+}
