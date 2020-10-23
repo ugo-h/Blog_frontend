@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './SignForm.css';
 import Spinner from '../../../Components/Spinner/Spinner';
 
 class FormTemplate extends Component {

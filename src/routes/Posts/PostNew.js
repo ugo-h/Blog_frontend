@@ -1,16 +1,11 @@
 import React from 'react';
-import CreatePostForm from '../../Containers/Form/CreatePostForm/CreatePostForm';
+import PostForm from '../../Containers/Form/CreatePostForm/PostForm';
 
 const PostNew = (props) => {
     return(
         <div>
             <h1>Create new Post</h1>
-            <CreatePostForm
-                fields={{'tags':'tagInput', 'title':'text', 'content':'textarea'}}
-                route="posts/create"
-                userToken={props.userToken}
-                redirect="/"
-            />
+            <PostForm userToken={props.userToken}/>
         </div>
     )
 }
