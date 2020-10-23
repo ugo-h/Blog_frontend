@@ -6,17 +6,14 @@
     display:flex;
     flex-flow:column;
     align-items: center;
-    /* max-width: 700px; */
     max-width: 900px;
     width:100%;
 }
 .Home__header{
+    color: #464646;
     display: flex;
     justify-content: space-between;
-    width: 80%;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 4rem;
-
+    width: 90%;
 }
 .Home__header__title{
     border: none;
@@ -25,8 +22,12 @@
 .Call-to-action-btn{
   
     align-self: center;
-    background: orange;
-    padding: 1rem;
+    background: #FFBF6F;
+    padding: 0.5rem 1rem;
     color: white;
     text-decoration: none;
+}
+
+.Call-to-action-btn:hover{
+    background: #EA927F;
 }

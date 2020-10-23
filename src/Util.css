@@ -1,0 +1,16 @@
+.Util__list, .Util__list--horizontal{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.Util__list--horizontal{
+    display: flex;
+    align-items:center;
+}
+.Util__list__el{
+    display: flex;
+    margin: 0.5rem;
+}
+.Util__list__el__icon{
+    width: 1rem;
+}

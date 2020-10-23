@@ -28,7 +28,7 @@
     outline: none;
 }
 .form__error{
-    color: red;
+    color: #EA927F;;
 }
 .SignForm__button{
     cursor: pointer;
