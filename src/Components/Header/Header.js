@@ -20,14 +20,14 @@ const header = (props) => (
                 
                     {props.isAuth?
                     <li className="Header__nav__el">
-                    <Link to="/signout">Sign Out</Link>
+                    <Link to="/auth/signout">Sign Out</Link>
                     </li>
                     :<Aux>
                         <li className="Header__nav__el">
-                        <Link to="/signin">Sign In</Link>
+                        <Link to="/auth/signin">Sign In</Link>
                         </li>
                         <li className="Header__nav__el">
-                        <Link className="Header__nav__btn" to="/signup">Sign Up</Link>
+                        <Link className="Header__nav__btn" to="/auth/signup">Sign Up</Link>
                         </li>                       
                     </Aux>}
                 

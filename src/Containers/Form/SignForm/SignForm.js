@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Field from '../../../Components/Field/Field';
 import {createEmptyErrorFields, createFieldsFromArray, sendFormRequest, processErrors} from '../formLogic';
 import './SignForm.css';
-
+import  withAuth from '../../../Context/authHoc';
 
 class SignForm extends Component {
     constructor(props) {
@@ -38,7 +38,7 @@ class SignForm extends Component {
     }
     processResponse(body) {
         const userToken = body.token;
-        this.props.signInHandler(userToken);
+        this.props.context.setToken(userToken)
     }
 
     createFields() {
@@ -68,4 +68,4 @@ class SignForm extends Component {
 
 }
 
-export default SignForm;
+export default withAuth(SignForm);

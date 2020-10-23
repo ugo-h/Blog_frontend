@@ -4,6 +4,7 @@ import Field from '../../../Components/Field/Field';
 import TagInput from './TagInput/TagInput';
 import { createEmptyErrorFields, processErrors, sendRequestWithUserToken} from '../formLogic';
 import { withRouter } from 'react-router-dom';
+import withAuth from '../../../Context/authHoc';
 
 class PostForm extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class PostForm extends Component {
         ev.preventDefault();
         const route = '/posts/create';
         const data = this.state.fields;
-        const token = this.props.userToken;
+        const token = this.props.context.authToken;
         const body = await sendRequestWithUserToken(route, data, token);
         if(body.errors) {
             const errors = processErrors(body.errors);
@@ -88,4 +89,4 @@ class PostForm extends Component {
 
 }
 
-export default withRouter(PostForm);
+export default withRouter(withAuth(PostForm));

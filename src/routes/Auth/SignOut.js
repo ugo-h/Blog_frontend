@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import withAuth from '../../Context/authHoc';
+import { Protected } from '../../Helper/Protected';
 
 function SignOut(props) {
     useEffect(() => {
-        props.signOutHandler();
+        props.context.setToken('');
     })
     return (
-       <Redirect to="/"/>
+        <Protected>
+            <Redirect to="/signin"/>
+       </Protected>
     )
 };
 
-export default SignOut;
+export default withAuth(SignOut);

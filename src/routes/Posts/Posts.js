@@ -4,18 +4,18 @@ import PostRoute from './PostRoute';
 import PostNew from './PostNew';
 import { Protected } from '../../Helper/Protected';
 
-function Posts(props) { 
+function Posts() { 
     let match = useRouteMatch();
     return(
         <main className="Home">
         <Switch>
             <Route path={`${match.path}/new`}>
-                <Protected isAuth={props.isAuth}>
-                    <PostNew userToken={props.isAuth}/>  
+                <Protected>
+                    <PostNew/>  
                 </Protected>   
             </Route>
             <Route path={`${match.path}/:postId`}>
-                <PostRoute userToken={props.isAuth}/>
+                <PostRoute/>
             </Route>
         </Switch>
     </main>
