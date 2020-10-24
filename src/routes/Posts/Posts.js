@@ -7,7 +7,7 @@ import { Protected } from '../../Helper/Protected';
 function Posts() { 
     let match = useRouteMatch();
     return(
-        <main className="Home">
+        <main className="Home Util__main Util__card">
         <Switch>
             <Route path={`${match.path}/new`}>
                 <Protected>

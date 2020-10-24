@@ -1,0 +1,25 @@
+.Form{
+    display:flex;
+    flex-flow: column;
+    align-items:  flex-start;
+    width:100%;
+    max-width: 400px;
+    padding:1rem;
+    position:relative;
+}
+.Form__button{
+    cursor: pointer;
+    padding:1rem;
+    border: none;
+    background: #ccc;
+    max-width: 6rem;
+}
+.Form__button:hover{
+    background:#999;
+}
+
+.Form__loader-container{
+    position: absolute;
+    left: 30%;
+    bottom: 2.5rem;
+}

@@ -1,5 +1,4 @@
 .Header{
-    /* padding: 1rem; */
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-around;
@@ -7,9 +6,6 @@
     width: 100%;
     color: white;
 }
-/* .Header__nav--center {
-    
-} */
 .Header__nav--right {
     position: absolute;
     right:2%;

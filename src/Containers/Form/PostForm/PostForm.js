@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './PostForm.css';
+import '../Form.css';
 import Field from '../../../Components/Field/Field';
 import TagInput from './TagInput/TagInput';
+import Spinner from '../../../Components/Spinner/Spinner';
 import { createEmptyErrorFields, processErrors, sendRequestWithUserToken} from '../formLogic';
 import { withRouter } from 'react-router-dom';
 import withAuth from '../../../Context/authHoc';
@@ -15,7 +16,8 @@ class PostForm extends Component {
                 title: '',
                 tags: []
             },
-            errors: {}
+            errors: {},
+            isLoading: false
         }
         this.state.errors = createEmptyErrorFields(this.state.fields);
 
@@ -26,15 +28,17 @@ class PostForm extends Component {
     }
     async submitHandler(ev) {
         ev.preventDefault();
+        this.setState({isLoading: true})
         const route = '/posts/create';
         const data = this.state.fields;
         const token = this.props.context.authToken;
         const body = await sendRequestWithUserToken(route, data, token);
         if(body.errors) {
             const errors = processErrors(body.errors);
-            this.setState({errors});
+            this.setState({errors, isLoading: false});
             return;
         }
+        this.setState({isLoading: false})
         this.props.history.push('/')
     }
 
@@ -63,25 +67,29 @@ class PostForm extends Component {
         const { fields, errors } = this.state;
         return(
             <form onSubmit={this.submitHandler}>
-                <label>Tags</label>
-                <TagInput
-                    tagsArray={this.state.fields.tags}
-                    value={this.state.fields.tags}
-                    name="tag"
-                    addTag={this.addTag}
-                    removeTag={this.removeTag}
+                <Field
+                    label="Tags"
+                    error=""
+                    input={<TagInput
+                        tagsArray={this.state.fields.tags}
+                        value={this.state.fields.tags}
+                        name="tag"
+                        addTag={this.addTag}
+                        removeTag={this.removeTag}
+                    />}
                 />
                 
                 <Field
                     label="Title" 
                     error={errors['title']}
-                    input={<input name="title" value={fields.title} onChange={this.inputChangeHandler}/>}
+                    input={<input className="field__input" name="title" value={fields.title} onChange={this.inputChangeHandler}/>}
                 />
                 <Field 
                     label={'Write your post here:'} 
                     error={errors['content']}
-                    input={<textarea name="content" value={fields.content} onChange={this.inputChangeHandler}/>}
+                    input={<textarea rows="5" className="field__textarea" name="content" value={fields.content} onChange={this.inputChangeHandler}/>}
                 />
+                {this.state.isLoading? <div className="Form__loader-container"><Spinner size="small"/></div>:''}
                 <input type="submit" value="Create"/>
             </form>
         )

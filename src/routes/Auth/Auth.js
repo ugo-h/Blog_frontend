@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import SignUp from './SignUp'
 import SignIn from './SignIn';
 import SignOut from './SignOut';
+import './AuthLayout.css';
 
 const auth = () => (
         <Fragment>

@@ -1,5 +1,5 @@
 .Post-preview{
-    padding:3rem 1rem;
+    padding:3rem 0;
     width: 90%;
     height: 100%;
     display: flex;
@@ -19,6 +19,7 @@
     margin: 0;
 }
 .Post-preview__content{
+    padding:1rem;
     margin-bottom: 1rem;
 }
 .Post-preview__link{
@@ -31,4 +32,19 @@
 }
 .Post-preview__link:hover {
     color: black;
+}
+
+@media(max-width: 700px) {
+    .Post-preview__title{
+        font-size: 1.2rem;
+    }
+    .Post-preview__header{
+        flex-wrap: wrap-reverse;
+    }
+    .Post-preview__header__subtitle{
+        font-size: 0.6rem;
+    }
+    .Post-preview__content{
+        width: 90%;
+    }
 }

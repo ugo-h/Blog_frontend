@@ -1,11 +1,18 @@
 .Tag-cloud{
+    position: relative;
     width: 300px;
+    min-height: 7rem;
 }
 .Tag-cloud .TagsList{
     justify-content: center;
 }
 .Tag-cloud .TagsList__element{
     font-size: 1rem;
-    padding: 0.5rem;
+    padding: 0.2rem 1rem;
     margin: 0.5rem;
+}
+.Tag-cloud__spinner-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }

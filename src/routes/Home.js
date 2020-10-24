@@ -5,7 +5,7 @@ import './Home.css'
 import withAuth from '../Context/authHoc';
 
 const home = ({context}) => (
-    <main className="Home">
+    <main className="Home Util__main Util__card">
         <div className="Home__header">
             <h1 className="Home__header__title">Welcome to Ugo's Blog</h1>
             {!!context.authToken?

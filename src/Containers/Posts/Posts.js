@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PostsList from '../../Components/Posts/PostList/PostsList';
 import Paginate from '../../Helper/Paginator/Paginator';
-import Aux from '../../Helper/Auxillury';
 import Spinner from '../../Components/Spinner/Spinner';
-
+import ServerUnavailableMsg from '../../Components/ServerUnvailableMsg/ServerUnavailableMsg';
 import {createEqualSubarrays, sortByDate} from './logic';
 
 
@@ -23,7 +22,6 @@ class Posts extends Component {
             this.setState({ isLoadedSuccessfully:false, isLoading: false })
             return;
         }
-        console.log(res.status)
         const data = await res.json();
         if(!data) {
             return;
@@ -74,13 +72,13 @@ class Posts extends Component {
         const hasPosts = !!this.state.postsSeparated[this.state.currentPage];
         const isLoadedSuccessfully = this.state.isLoadedSuccessfully;
         return (
-            <Aux>
+            <div className="Container">
                 {
-                    isLoadedSuccessfully? '': 'Sorry, the server is unavailable. Please, try agan later.'
+                    isLoadedSuccessfully? '': <ServerUnavailableMsg/>
                 }
                 {
                     isLoading? 
-                    <Spinner /> :
+                    <div className="Home__spinner-container"><Spinner/></div> :
                     hasPosts?
                     <PostsList posts={this.getPostsForPage()}/>
                     :<h2 style={{color: "#ccc"}}>There are no posts yet</h2>
@@ -90,7 +88,7 @@ class Posts extends Component {
                     this.renderPagination()
                     :''
                 }        
-            </Aux>
+            </div>
         )
     };
 
