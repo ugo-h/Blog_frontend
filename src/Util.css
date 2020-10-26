@@ -1,4 +1,4 @@
-.Util__list, .Util__list--horizontal{
+.Util__list, .Util__list--horizontal, .Util__list--vertical{
     padding: 0;
     margin: 0;
     list-style: none;
@@ -7,9 +7,25 @@
     display: flex;
     align-items:center;
 }
-.Util__list__el{
+.Util__list--vertical{
     display: flex;
-    margin: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.Util__list--vertical .Util__list__el{
+    display: flex;
+    margin: 0.5rem 0rem;
+}
+.Util__list--horizontal .Util__list__el{
+    display: flex;
+    margin:  0rem 0.5rem;
+}
+.Util__list__el a{
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: inherit;
 }
 .Util__list__el__icon{
     width: 1rem;

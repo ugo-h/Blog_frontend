@@ -1,45 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import './Header.css';
-import Aux from '../../Helper/Auxillury';
-import SliderMenu from './Menu/Menu';
+import './Header.css'
+import MenuWrapper from '../../Containers/SliderMenuWrapper/SliderMenuWrapper';
 
 const header = (props) => (
     <header className="Header">
-        <nav className="Header__nav--center">
-            <ul>
-                 <li className="Header__nav__el">
-                    <Link to="/">Home</Link>
+        <nav className="Header__nav">
+            <ul className="Header__nav__list Util__list--horizontal">
+                <li className="Util__list__el">
+                <Link to="/">Home</Link>
                 </li>
-                <li className="Header__nav__el">
-                    <Link to="/tags">Tags</Link>
+                <li className="Util__list__el">
+                <Link  to="/tags">Tags</Link>
                 </li>
-            </ul>
+            </ul> 
+            <ul className="Header__nav__list Util__list--horizontal">
+            {props.isAuth?<li className="Util__list__el"><Link to="/auth/signout">Sign Out</Link></li>
+            :<li className="Util__list__el"><Link to="/auth/signin">Sign In</Link></li>}
+            </ul> 
         </nav>
-        <nav className="Header__nav--right">
-            <ul>
-                
-                    {props.isAuth?
-                    <li className="Header__nav__el">
-                    <Link to="/auth/signout">Sign Out</Link>
-                    </li>
-                    :<Aux>
-                        <li className="Header__nav__el">
-                        <Link to="/auth/signin">Sign In</Link>
-                        </li>
-                        <li className="Header__nav__el">
-                        <Link className="Header__nav__btn" to="/auth/signup">Sign Up</Link>
-                        </li>                       
-                    </Aux>}
-                
-            </ul>
-        </nav>
-        <input className="Hamburger-menu__checkbox" type="checkbox"/>
-        <SliderMenu
-            menu={[
-            <Link to="/auth/signin">Sign In</Link>,
-        ]}
-        />
+        <MenuWrapper menu={[
+            props.isAuth?<Link to="/auth/signout">Sign Out</Link>
+            :<Link to="/auth/signup">Sign Up</Link>,
+
+            <Link to="/">Home</Link>,
+            <Link to="/tags">Tags</Link>
+        ]}/>
+       
        
     </header>
 )

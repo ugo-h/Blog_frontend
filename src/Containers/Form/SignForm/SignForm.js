@@ -4,6 +4,7 @@ import Spinner from '../../../Components/Spinner/Spinner';
 import {createEmptyErrorFields, createFieldsFromArray, sendFormRequest, processErrors} from '../formLogic';
 import '../Form.css';
 import  withAuth from '../../../Context/authHoc';
+import ServerMsg from '../../../Components/ServerUnvailableMsg/ServerUnavailableMsg';
 
 class SignForm extends Component {
     constructor(props) {
@@ -11,7 +12,8 @@ class SignForm extends Component {
         this.state = {
             fields: {},
             errors: {},
-            isLoading: false
+            isLoading: false,
+            isLoadedSuccessfuly: true
         };
         this.state.fields = createFieldsFromArray(this.props.fields);
         this.state.errors = createEmptyErrorFields(this.state.fields);
@@ -31,7 +33,13 @@ class SignForm extends Component {
         this.setState({isLoading: true})
         const route = this.props.route;
         const data = this.state.fields;
-        const body = await sendFormRequest(route, data);
+        let body;
+        try{
+            body = await sendFormRequest(route, data);
+        } catch(err) {
+            this.setState({isLoadedSuccessfuly: false, isLoading: false});
+            return;
+        };
         if(body.errors) {
             const errors = processErrors(body.errors);
             this.setState({errors, isLoading: false});
@@ -66,6 +74,7 @@ class SignForm extends Component {
            <form className="Form" onSubmit={this.submitHandler}>
                {this.createFields()}
                {this.state.isLoading? <div className="Form__loader-container"><Spinner size="small"/></div>:''}
+               {this.state.isLoadedSuccessfuly? '':<ServerMsg size="small"/>}
                <input className="Form__button" type="submit" value="Submit"/>
            </form>
        ) 
