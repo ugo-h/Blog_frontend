@@ -1,13 +1,16 @@
 .Header{
+    position: relative;
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     background: #464646;
     width: 100%;
+    padding:2rem 0;
     color: white;
 }
 .Header__nav--right {
-    position: absolute;
+    position: relative;
     right:2%;
 }
 .Header ul{
@@ -30,8 +33,28 @@
 }
 
 .Header__nav__btn{
-    /* margin: 0 3rem; */
     padding: 1rem;
     background:#FFBF6F;
     color: white;
+}
+.Hamburger-menu__checkbox{
+    position: absolute;
+    right: 1rem;
+    display: none;
+    height: 40px;
+    width: 40px;
+}
+.Hamburger-menu__checkbox:checked{
+    background: red;
+}
+@media(max-width: 700px) {
+    .Hamburger-menu__checkbox{
+        display: block;
+    }
+    .Header__nav--center {
+        display: none;
+    }
+    .Header__nav--right {
+        display: none;
+    }
 }

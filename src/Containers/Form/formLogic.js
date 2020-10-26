@@ -47,7 +47,6 @@ export async function sendRequestWithUserToken(route, body, token) {
         },    
         body
     });
-    console.log(body)
     const data = await res.json();
     return data;
 }
