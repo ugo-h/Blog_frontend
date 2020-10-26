@@ -12,7 +12,7 @@ const siginIn = (props) => {
                 fields={["email", "password"]}
                 route="/signin"
             />
-            <p>Do not have an account? <Link to="/signup">join Us!</Link></p>
+            <p>Do not have an account? <Link to="/auth/signup">join Us!</Link></p>
         </main>
         </RedirectWhenAuth>
     )

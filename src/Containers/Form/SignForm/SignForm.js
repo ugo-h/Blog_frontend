@@ -58,12 +58,19 @@ class SignForm extends Component {
         for(const name in this.state.fields) {
             const value = this.state.fields[name]
             const error = this.state.errors[name]
+            let type = name;
+            let autocomplete = "false";
+            if(name.includes('password')) {
+                autocomplete = "true";
+                type="password"
+            }
+            const label = name.split('-').join(' ');
             fieldsArray.push(
             <Field
                 key={name}
-                label={name} 
+                label={label} 
                 error={error}
-                input={<input className="field__input" name={name} type={name} value={value} onChange={this.inputChangeHandler}/>}
+                input={<input autoComplete={autocomplete} className="field__input" name={name} type={type} value={value} onChange={this.inputChangeHandler}/>}
             />)
         }
         return fieldsArray;

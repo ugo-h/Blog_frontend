@@ -11,6 +11,7 @@ export async function sendFormRequest(route, body) {
     });
     const data = await res.json();
     return data;
+    
 }
 
 export function processErrors(errors) {
