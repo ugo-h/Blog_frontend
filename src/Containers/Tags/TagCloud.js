@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './TagCloud.css';
 import TagList from '../../Components/TagsList/TagList';
 import Spinner from '../../Components/Spinner/Spinner';
+import ErrorMsg from '../../Components/ServerUnvailableMsg/ServerUnavailableMsg';
 
 class TagCloud extends Component{
     state = {
@@ -31,9 +32,9 @@ class TagCloud extends Component{
         const isLoadedSuccessfully = this.state.isLoadedSuccessfully;
      return(
          <div className="Tag-cloud">
-             {isLoadedSuccessfully? '': 'Sorry, the server is unavailable. Please, try agan later.'}
+             {isLoadedSuccessfully? '': <ErrorMsg/>}
              {
-                isLoading?<Spinner/> :
+                isLoading?<div className="Tag-cloud__spinner-container"><Spinner/></div> :
                 <TagList tags={this.state.cloud}/>
              }
          </div>

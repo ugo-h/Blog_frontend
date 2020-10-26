@@ -2,8 +2,6 @@
     position: relative;
     line-height: 1.1rem;
     border: 1px solid #ccc;
-    /* min-width:400px;
-    max-width:600px; */
     width:400px;
     display: flex;
     flex-wrap: wrap;

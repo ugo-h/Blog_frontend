@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import './Header.css';
 import Aux from '../../Helper/Auxillury';
+import SliderMenu from './Menu/Menu';
 
 const header = (props) => (
     <header className="Header">
@@ -33,6 +34,13 @@ const header = (props) => (
                 
             </ul>
         </nav>
+        <input className="Hamburger-menu__checkbox" type="checkbox"/>
+        <SliderMenu
+            menu={[
+            <Link to="/auth/signin">Sign In</Link>,
+        ]}
+        />
+       
     </header>
 )
 

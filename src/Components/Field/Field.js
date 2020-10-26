@@ -6,7 +6,7 @@ const field = ({label, error, input}) => {
         <label className="field">
             {label}
             {input}
-            <span className="form__error">
+            <span className="field__error">
                 {error}
             </span>
         </label>

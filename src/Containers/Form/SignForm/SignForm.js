@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Field from '../../../Components/Field/Field';
+import Spinner from '../../../Components/Spinner/Spinner';
 import {createEmptyErrorFields, createFieldsFromArray, sendFormRequest, processErrors} from '../formLogic';
-import './SignForm.css';
+import '../Form.css';
 import  withAuth from '../../../Context/authHoc';
 
 class SignForm extends Component {
@@ -9,7 +10,8 @@ class SignForm extends Component {
         super(props);
         this.state = {
             fields: {},
-            errors: {}
+            errors: {},
+            isLoading: false
         };
         this.state.fields = createFieldsFromArray(this.props.fields);
         this.state.errors = createEmptyErrorFields(this.state.fields);
@@ -26,14 +28,16 @@ class SignForm extends Component {
     }
     async submitHandler(ev) {
         ev.preventDefault();
+        this.setState({isLoading: true})
         const route = this.props.route;
         const data = this.state.fields;
         const body = await sendFormRequest(route, data);
         if(body.errors) {
             const errors = processErrors(body.errors);
-            this.setState({errors});
+            this.setState({errors, isLoading: false});
             return;
         }
+        this.setState({isLoading: false})
         this.processResponse(body)
     }
     processResponse(body) {
@@ -51,7 +55,7 @@ class SignForm extends Component {
                 key={name}
                 label={name} 
                 error={error}
-                input={<input name={name} type={name} value={value} onChange={this.inputChangeHandler}/>}
+                input={<input className="field__input" name={name} type={name} value={value} onChange={this.inputChangeHandler}/>}
             />)
         }
         return fieldsArray;
@@ -59,9 +63,10 @@ class SignForm extends Component {
 
     render() {
         return(
-           <form className="SignForm" onSubmit={this.submitHandler}>
+           <form className="Form" onSubmit={this.submitHandler}>
                {this.createFields()}
-               <input className="SignForm__button" type="submit" value="Submit"/>
+               {this.state.isLoading? <div className="Form__loader-container"><Spinner size="small"/></div>:''}
+               <input className="Form__button" type="submit" value="Submit"/>
            </form>
        ) 
     }

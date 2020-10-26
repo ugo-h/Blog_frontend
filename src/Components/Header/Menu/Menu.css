@@ -1,0 +1,22 @@
+.slider-menu{
+    position: fixed;
+    width: 50vw;
+    height: 100vh;
+    /* top:-1rem; */
+    top:0;
+    margin: 0;
+    right:0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index:100;
+    background: #464646;
+}
+
+.slider-menu__el{
+    padding: 0.5rem 3rem;
+}
+.slider-menu__el a{
+    color: white;
+    
+}
