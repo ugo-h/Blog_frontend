@@ -1,0 +1,37 @@
+.slider-menu{
+    transition: transform 200ms;
+    position: fixed;
+    padding-top: 3rem;
+    width: 50vw;
+    height: 100vh;
+    top:0;
+    right:0;
+    z-index:60;
+    background: #464646;
+}
+
+.slider-menu__el{
+    color: white;
+    width:100%;
+    cursor: pointer;
+}
+.slider-menu__el:hover{
+    background: #ccc;
+}
+.slider-menu__el a{
+    padding: 1rem 3rem;
+}
+.backdrop{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+}
+.hidden{
+    /* display: none; */
+    transform: translateX(100%);
+}
+

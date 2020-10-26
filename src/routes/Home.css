@@ -27,7 +27,7 @@
     background: #EA927F;
 }
 .Container{
-    min-height:5rem;
+    min-height:7rem;
     display: flex;
     flex-flow: column;
     align-items: center;
