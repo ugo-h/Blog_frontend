@@ -6,6 +6,7 @@ import Auth from './routes/Auth/Auth';
 import Posts from './routes/Posts/Posts';
 import Home from './routes/Home';
 import Tags from './routes/Tags/Tags';
+import User from './routes/User/User';
 import Footer from './Components/Footer/Footer';
 import AuthContext from './Context/AuthContext';
 
@@ -32,6 +33,9 @@ class App extends Component {
         <Header isAuth={this.state.userToken}/>
         <AuthContext.Provider value={{authToken: this.state.userToken, setToken: this.setToken.bind(this)}}>
         <Switch>
+            <Route path="/users/:name">
+              <User/>
+            </Route>
             <Route path="/auth">
               <Auth/>
             </Route>
@@ -41,9 +45,12 @@ class App extends Component {
             <Route path="/posts">
               <Posts/>
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home/>
-            </Route>     
+            </Route>
+            <Route>
+              404 User Not Found
+            </Route>
         </Switch>
         </AuthContext.Provider>       
         <Footer/>

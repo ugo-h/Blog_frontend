@@ -11,12 +11,17 @@ class Post extends Component {
         content: '',
         author: '',
         tags: [],
-        isLoading: true
+        isLoading: true,
+        isLoadedSuccessfully: true
     };
     
     async componentDidMount() {
         const id = this.props.id;
         const res = await fetch('http://localhost:5000/api/posts/' + id);
+        if(res.status === 404) {
+            this.setState({ isLoading: false, isLoadedSuccessfully: false });
+            return;
+        };
         const postInfo = await res.json();
 
         const { title , content, author, date, tags } = postInfo;
@@ -40,13 +45,14 @@ class Post extends Component {
 
     render() {
         const { isLoading } = this.state;
+        const { isLoadedSuccessfully } = this.state;
     return(
         <div className="Post">
         {
             isLoading?
             <div className="Post__spinner-container"><Spinner size="large"/></div>
             :
-            <Aux>
+            isLoadedSuccessfully?<Aux>
                 <h2 className="Post__title">{ this.state.title }</h2>
                 <div className="Post__header">
                     <TagsList tags={ this.state.tags }/>
@@ -56,7 +62,7 @@ class Post extends Component {
                 </div>
                 <p className="Post__content">{ this.state.content }</p>
                 <button onClick={this.deleteHandler.bind(this)}>DELETE</button>
-            </Aux>
+            </Aux>: '404 Page Not Found'
         }
         </div>
     );

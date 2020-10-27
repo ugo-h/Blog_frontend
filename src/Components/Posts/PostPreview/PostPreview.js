@@ -14,7 +14,7 @@ const PostPreview = (props) => {
                 </li>
                 <li className="Util__list__el">
                     <img className="Util__list__el__icon" src="https://www.svgrepo.com/show/311063/person.svg" alt="User"/>
-                    <h3 className="Post-preview__header__subtitle">{ props.author }</h3>
+                    <Link to={`/users/${props.author}`} className="Post-preview__header__subtitle">{ props.author }</Link>
                 </li>
                 <li className="Util__list__el">
                     <img className="Util__list__el__icon" src="https://www.svgrepo.com/show/78514/meeting-date.svg" alt="Date"/>
