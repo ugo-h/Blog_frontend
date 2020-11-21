@@ -3,8 +3,8 @@ import PostsList from '../../Components/Posts/PostList/PostsList';
 import Paginate from '../../Helper/Paginator/Paginator';
 import Spinner from '../../Components/Spinner/Spinner';
 import ServerUnavailableMsg from '../../Components/ServerUnvailableMsg/ServerUnavailableMsg';
-import {createEqualSubarrays, sortByDate} from './logic';
-
+import { createEqualSubarrays, sortByDate } from './logic';
+import { sendRequestWithFallback } from './handleFetchErrors';
 
 class Posts extends Component {
     state = {
@@ -15,22 +15,19 @@ class Posts extends Component {
         isLoadedSuccessfully: true
     };
     async componentDidMount() {
-        let res;
-        try{
-            res = await fetch('http://localhost:5000/api/posts');
-        } catch(error){
-            this.setState({ isLoadedSuccessfully:false, isLoading: false })
-            return;
-        }
+        let res = await sendRequestWithFallback('/posts', () => this.displayError());
         const data = await res.json();
-        if(!data) {
-            return;
-        }
+        if(data) this.loadPostsByPages(data);
+    };
+    
+    displayError() {
+        this.setState({ isLoadedSuccessfully:false, isLoading: false });
+    };
+    loadPostsByPages(data) {
         const postsSorted = sortByDate(data)
         const postsSeparated = this.separatePostsPerPages(postsSorted);
         this.setState({ postsSeparated, isLoading: false })
-    };
-    
+    }
 
     separatePostsPerPages(posts) {
         const postsSeparated = createEqualSubarrays(posts, this.state.postsPerPage);
