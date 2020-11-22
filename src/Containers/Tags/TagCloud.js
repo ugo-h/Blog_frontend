@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './TagCloud.css';
 import TagList from '../../Components/TagsList/TagList';
-import Spinner from '../../Components/Spinner/Spinner';
+import { withSpinner } from '../../Components/lib/util';
+import { sendRequestWithFallback } from '../../Helper/handleFetchErrors';
 import ErrorMsg from '../../Components/ServerUnvailableMsg/ServerUnavailableMsg';
 
 class TagCloud extends Component{
@@ -11,22 +12,22 @@ class TagCloud extends Component{
         isLoadedSuccessfully: true
     };
     async componentDidMount() {
-        let res;
-        try{
-            res = await fetch('http://localhost:5000/api/tags');
-        } catch(error) {
-            this.setState({ isLoading: false, isLoadedSuccessfully: false });
-            return;
-        }
-        const body = await res.json();
+        const { data, isSuccessful } = await sendRequestWithFallback('/tags', (code) => this.displatErrors(code))
+        if(isSuccessful) this.loadTags(data);
+    };
+    
+    loadTags(data) {
         const tagNames = [];
-        body.forEach((tag) => {
+        data.forEach((tag) => {
             tagNames.push(tag.name)
         })
         const isLoading = false;
         this.setState({ cloud: tagNames, isLoading });
-    }
+    };
 
+    displayErrors(code) {
+        this.setState({isLoading: false, isLoadedSuccessfully: false})
+    }
     render() {
         const isLoading = this.state.isLoading;
         const isLoadedSuccessfully = this.state.isLoadedSuccessfully;
@@ -34,8 +35,7 @@ class TagCloud extends Component{
          <div className="Tag-cloud">
              {isLoadedSuccessfully? '': <ErrorMsg/>}
              {
-                isLoading?<div className="Tag-cloud__spinner-container"><Spinner/></div> :
-                <TagList tags={this.state.cloud}/>
+                withSpinner(<TagList tags={this.state.cloud}/>, isLoading) 
              }
          </div>
      )   

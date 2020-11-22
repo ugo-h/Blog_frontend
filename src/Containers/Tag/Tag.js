@@ -1,40 +1,66 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import PostPreview from '../../Components/Posts/PostPreview/PostPreview';
-import Spinner from '../../Components/Spinner/Spinner';
-import Aux from '../../Helper/Auxillury';
+import PostList from '../../Components/Posts/PostList/PostsList'
+import { withSpinner } from '../../Components/lib/util';
+import { error as Error } from '../../Components/lib/lib';
+import { sendRequestWithFallback } from '../../Helper/handleFetchErrors';
 
 class Tag extends Component {
     state = {
         posts: [],
         tagname: '',
-        isLoading: true
-    }
-    componentDidMount(){
+        isLoading: true,
+        hasErrors: false,
+        errorCode: 200,
+        errorMsg: ''
+    };
+
+    async componentDidMount(){
         const tagname = this.props.match.params.tagname;
-        this.fetchData(tagname);
+        const { data, isSuccessful } = await sendRequestWithFallback(`/posts`, (code) => this.displayError(code));
+        if(isSuccessful) this.loadPosts(data, tagname);
     };
-    async fetchData(tagname) {
-        const res = await fetch('http://localhost:5000/api/posts');
-        const posts = await res.json();
-        console.log(posts)
-        const postsWithTag = posts.filter(post => post.tags.find(tag => tag===tagname))
+
+    displayError(code) {
         const isLoading = false;
-        this.setState({ posts: postsWithTag, tagname, isLoading })
+        const hasErrors = true;
+        const errorCode = code;
+        let errorMsg;
+        switch(code) {
+            case 404: 
+            errorMsg = 'Tag not found';
+            break;
+            default : ;
+        }
+        this.setState({ isLoading, errorCode, hasErrors, errorMsg });
+    }
+
+    loadPosts(posts, tagname) {
+        const postsWithTag = posts.filter(post => post.tags.find(tag => tag === tagname));
+        if(postsWithTag.length <= 0) {
+            this.displayError(404);
+            return;
+        }
+        const isLoading = false;
+        this.setState({ posts: postsWithTag, tagname, isLoading });
     };
+
     render() {
         const isLoading = this.state.isLoading;
+        const hasErrors = this.state.hasErrors;
         return(
-            <Aux>
-                <h1>Posts with tag "{this.state.tagname}":</h1>
-                {isLoading? <div className="Post__spinner-container"><Spinner/></div> :
-                    <ul className="Posts">
-                        {this.state.posts.map((post, index) => <PostPreview key={index} id={post._id} date={post.date} title={post.title} tags={post.tags} content={post.content} author={post.author}/>)}
-                    </ul>}
-            </Aux>
-           
-        )
-    }
-}
+            hasErrors?
+            <Error code={this.state.errorCode} msg={this.state.errorMsg}/>
+            :
+            withSpinner(
+                <div className="Container">
+                    <h1>Posts with tag "{this.state.tagname}"</h1>
+                    <PostList posts={this.state.posts}/>
+                </div>,
+                isLoading
+            )
+        );
+    };
+};
 
 export default withRouter(Tag);

@@ -7,12 +7,7 @@ const postsList = ({ posts }) => {
             {posts.map(post => (
                 <PostPreview
                     key={post._id}
-                    title={post.title}
-                    tags={post.tags}
-                    content={post.content}
-                    date={post.date}
-                    author={post.author}
-                    id={post._id}
+                    post={post}
                 />))}
         </ul>
     )
