@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import TagsList from '../../Components/TagsList/TagList';
-import Spinner from '../../Components/Spinner/Spinner';
-import Aux from '../../Helper/Auxillury';
+import { withSpinner } from '../../Components/lib/util';
+import { sendRequestWithFallback } from '../../Helper/handleFetchErrors';
+import { error as Error } from '../../Components/lib/lib';
 import './Post.css';
 
 class Post extends Component {
@@ -11,18 +12,35 @@ class Post extends Component {
         content: '',
         author: '',
         tags: [],
-        isLoading: true
+        isLoading: true,
+        isLoadedSuccessfully: true,
+        errorCode: 200,
+        errorMsg: ''
     };
     
     async componentDidMount() {
         const id = this.props.id;
-        const res = await fetch('http://localhost:5000/api/posts/' + id);
-        const postInfo = await res.json();
+        const { data, isSuccessful } = await sendRequestWithFallback(`/posts/${id}`, (code) => this.displayError(code))
+        if(isSuccessful) this.loadPost(data);
+    };
+    
+    displayError(code) {
+        let errorMsg;
+        switch(code) {
+            case 404: 
+            errorMsg = 'Post not found';
+            break;
+            default: ;
+        }
+        this.setState({ isLoading: false, isLoadedSuccessfully: false, errorCode: code, errorMsg });
+    };
 
-        const { title , content, author, date, tags } = postInfo;
+    loadPost(data) {
+        const { title , content, author, date, tags } = data;
         const isLoading = false;
         this.setState({ title, content, author, date, tags, isLoading })
     };
+
     async deleteHandler() {
         const id = this.props.id;
         const token = this.props.userToken;
@@ -35,31 +53,29 @@ class Post extends Component {
             },    
         });
         console.log('redirecting');
-        this.props.history.push('/')
+        this.props.history.push('/');
     }
 
     render() {
         const { isLoading } = this.state;
-    return(
-        <div className="Post">
-        {
-            isLoading?
-            <div className="Post__spinner-container"><Spinner size="large"/></div>
-            :
-            <Aux>
-                <h2 className="Post__title">{ this.state.title }</h2>
-                <div className="Post__header">
-                    <TagsList tags={ this.state.tags }/>
-                    <h3 className="Post__header__subtitle">{ this.state.author }</h3>
-                    <span className="Post__header__subtitle">{ new Date(this.state.date).toDateString() }</span>
-                    
-                </div>
-                <p className="Post__content">{ this.state.content }</p>
-                <button onClick={this.deleteHandler.bind(this)}>DELETE</button>
-            </Aux>
-        }
-        </div>
-    );
+        const { isLoadedSuccessfully } = this.state;
+        return(
+            <div className="Post">
+            {
+                withSpinner(
+                isLoadedSuccessfully?<Fragment>
+                    <h2 className="Post__title">{ this.state.title }</h2>
+                    <div className="Post__header">
+                        <TagsList tags={ this.state.tags }/>
+                        <h3 className="Post__header__subtitle">{ this.state.author }</h3>
+                        <span className="Post__header__subtitle">{ new Date(this.state.date).toDateString() }</span>       
+                    </div>
+                    <p className="Post__content">{ this.state.content }</p>
+                    <button onClick={this.deleteHandler.bind(this)}>DELETE</button>
+                </Fragment>: <Error code={this.state.errorCode} msg={this.state.errorMsg}/>, isLoading, 'large')
+            }
+            </div>
+        );
     }
 };
 

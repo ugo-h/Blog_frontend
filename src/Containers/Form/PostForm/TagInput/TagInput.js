@@ -2,22 +2,19 @@ import React, { Component } from 'react';
 import X from '../../../../Components/XButton/XButton';
 import './TagInput.css';
 
-//Вынести поле tags наружу
-//function addTags 
-//function removeTags
-//в props
 class TagInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
             tagField: ''
         };
-    }
+    };
     
     inputChangeHandler(ev) {
         let tagField = ev.target.value;
         this.setState({ tagField });
-    }
+    };
+
     keyHandler(ev) {
         //remove tag on Backspace
         // --remove in setTimeout
@@ -27,27 +24,18 @@ class TagInput extends Component {
         //create tag on Enter
         //--maybe also create tags with animation to provide smooth fetching
         } else if(ev.key==='Enter' && this.state.tagField.trim()){            
-            let tagField = this.state.tagField;
-            if(!this.props.tagsArray.includes(tagField)) {
-                this.props.addTag(tagField.toLocaleLowerCase());
-            }
-            tagField = '';
-            this.setState({ tagField });
-        
-            
+            this.saveTag();
+        };
+    };
+
+    saveTag() {
+        let tagField = this.state.tagField;
+        if(!this.props.tagsArray.includes(tagField)) {
+            this.props.addTag(tagField.toLocaleLowerCase());
         }
-    }
-    async sendPostRequest(data, route) {
-        const res = await fetch(`http://localhost:5000/tags/${route}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': `Bearer ${this.props.userToken}`
-            },    
-            body: JSON.stringify(data)
-        });
-        return res;
-    }
+        tagField = '';
+        this.setState({ tagField });  
+    };
 
     render() {
         return(
@@ -60,11 +48,12 @@ class TagInput extends Component {
                     value={this.state.tagField} 
                     onChange={this.inputChangeHandler.bind(this)}
                     onKeyDown={this.keyHandler.bind(this)}
+                    onBlur={this.saveTag.bind(this)}
                     />
                 </ul>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 export default TagInput;

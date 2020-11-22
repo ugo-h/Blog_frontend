@@ -27,6 +27,7 @@
     background: #EA927F;
 }
 .Container{
+    width: 100%;
     min-height:7rem;
     display: flex;
     flex-flow: column;
