@@ -15,8 +15,7 @@ class Posts extends Component {
         isLoadedSuccessfully: true
     };
     async componentDidMount() {
-        let res = await sendRequestWithFallback('/posts', () => this.displayError());
-        const data = await res.json();
+        let data = await sendRequestWithFallback('/posts', () => this.displayError());
         if(data) this.loadPostsByPages(data);
     };
     
