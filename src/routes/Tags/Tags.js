@@ -7,7 +7,6 @@ function Tags() {
     return(
         <main className="Home Util__main Util__card">
             <Switch>
-               
                 <Route path="/tags/:tagname"> 
                     <Tag/>
                 </Route>

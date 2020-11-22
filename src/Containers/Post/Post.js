@@ -72,7 +72,7 @@ class Post extends Component {
                     </div>
                     <p className="Post__content">{ this.state.content }</p>
                     <button onClick={this.deleteHandler.bind(this)}>DELETE</button>
-                </Fragment>: <Error code={this.state.errorCode} msg={this.state.errorMsg}/>, isLoading, 'large')
+                </Fragment>: <Error code={this.state.errorCode} msg={this.state.errorMsg}/>, isLoading)
             }
             </div>
         );

@@ -10,7 +10,6 @@ import User from './routes/User/User';
 import Footer from './Components/Footer/Footer';
 import AuthContext from './Context/AuthContext';
 
-document.coockie = "promo_shown=1; Max-Age=2600000; Strict"
 class App extends Component {
   state = {
     userToken: ''
