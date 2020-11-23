@@ -19,7 +19,11 @@
 }
 
 .Form__loader-container{
-    position: absolute;
-    left: 30%;
-    bottom: 2.5rem;
+margin-top: 1rem;
+  position: relative;
+}
+.Form__error-container{
+    margin-top: 2rem;
+    position: relative;
+    margin-bottom: 4rem;
 }

@@ -2,7 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import TagsList from '../../Components/TagsList/TagList';
 import { withSpinner } from '../../Components/lib/util';
-import { sendRequestWithFallback } from '../../Helper/handleFetchErrors';
+import { 
+    sendRequestWithFallback,
+    getErrorMsgFromCode 
+} from '../../Helper/handleFetchErrors';
 import { error as Error } from '../../Components/lib/lib';
 import './Post.css';
 
@@ -25,13 +28,7 @@ class Post extends Component {
     };
     
     displayError(code) {
-        let errorMsg;
-        switch(code) {
-            case 404: 
-            errorMsg = 'Post not found';
-            break;
-            default: ;
-        }
+        const errorMsg = getErrorMsgFromCode(code, 'Post')
         this.setState({ isLoading: false, isLoadedSuccessfully: false, errorCode: code, errorMsg });
     };
 

@@ -3,7 +3,10 @@ import { withRouter } from 'react-router-dom';
 import PostList from '../../Components/Posts/PostList/PostsList'
 import { withSpinner } from '../../Components/lib/util';
 import { error as Error } from '../../Components/lib/lib';
-import { sendRequestWithFallback } from '../../Helper/handleFetchErrors';
+import { 
+    sendRequestWithFallback, 
+    getErrorMsgFromCode 
+} from '../../Helper/handleFetchErrors';
 
 class Tag extends Component {
     state = {
@@ -25,13 +28,7 @@ class Tag extends Component {
         const isLoading = false;
         const hasErrors = true;
         const errorCode = code;
-        let errorMsg;
-        switch(code) {
-            case 404: 
-            errorMsg = 'Tag not found';
-            break;
-            default : ;
-        }
+        const errorMsg = getErrorMsgFromCode(code, 'Tag');
         this.setState({ isLoading, errorCode, hasErrors, errorMsg });
     }
 

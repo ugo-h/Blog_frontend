@@ -23,14 +23,14 @@ class TagInput extends Component {
             this.props.removeTag();
         //create tag on Enter
         //--maybe also create tags with animation to provide smooth fetching
-        } else if(ev.key==='Enter' && this.state.tagField.trim()){            
+        } else if(ev.key==='Enter'){            
             this.saveTag();
         };
     };
 
     saveTag() {
         let tagField = this.state.tagField;
-        if(!this.props.tagsArray.includes(tagField)) {
+        if(!this.props.tagsArray.includes(tagField) && tagField.trim()) {
             this.props.addTag(tagField.toLocaleLowerCase());
         }
         tagField = '';

@@ -1,46 +1,42 @@
 import React, { Component, Fragment } from 'react';
-import {url} from '../../config';
 import '../../Components/Posts/PostList/PostsList';
 import PostsList from '../../Components/Posts/PostList/PostsList';
-import Spinner from '../../Components/Spinner/Spinner';
+import { withSpinner } from '../../Components/lib/util';
+import { error as Error } from '../../Components/lib/lib';
+import { getErrorMsgFromCode, sendRequestWithFallback } from '../../Helper/handleFetchErrors';
 
 class UserPosts extends Component {
     state = {
         posts: [],
         isLoadedSuccessfully: true,
-        isLoading: false
+        isLoading: false,
+        errorCode: 200,
+        errorMsg: ''
     }
     async componentDidMount() {
         this.setState({ isLoading: true })
-        const res = await fetch(`${url}/users/${this.props.id}`);
-        if(res.status === 404) {
-            this.setState({ isLoadedSuccessfully: false, isLoading: false })
-            return;
-        }
-        const posts = await res.json();
+        const {data, isSuccessful} = await sendRequestWithFallback(`/users/${this.props.id}`, (code) => this.displayErrors(code))
+        if(isSuccessful) this.loadUserPosts(data)
+    };
+    
+    loadUserPosts(posts) {
         this.setState({ posts, isLoading: false });
     }
-    handleSpinner(data) {
-        const { isLoading } = this.state; 
-        if(isLoading) {
-            return (
-                <Spinner/>
-            )
-        } else {
-            return data
-        }
+    displayErrors(code) {
+        const errorMsg = getErrorMsgFromCode(code)
+        this.setState({ isLoadedSuccessfully: false, errorCode: code, errorMsg, isLoading: false });
     }
+
     render() {
-        const { isLoadedSuccessfully } = this.state; 
+        const { isLoadedSuccessfully, isLoading } = this.state; 
         const name = this.props.id;
-        return(    
-           this.handleSpinner(
-                    isLoadedSuccessfully? 
-                    <Fragment>
-                        <h2>Posts made by {name}</h2>
-                        <PostsList posts={this.state.posts}/>
-                    </Fragment>: '404 User Not Found'
-           )                            
+        return withSpinner(
+            isLoadedSuccessfully? 
+            <Fragment>
+                <h2>Posts made by {name}</h2>
+                <PostsList posts={this.state.posts}/>
+            </Fragment>: <Error code={this.state.errorCode} msg={this.state.errorMsg}/>,
+            isLoading
         )
     }
 };

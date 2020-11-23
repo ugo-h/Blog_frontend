@@ -9,7 +9,7 @@ function SignOut(props) {
     })
     return (
         <Protected>
-            <Redirect to="/signin"/>
+            <Redirect to="/auth/signin"/>
        </Protected>
     )
 };

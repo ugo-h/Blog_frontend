@@ -12,7 +12,7 @@ class TagCloud extends Component{
         isLoadedSuccessfully: true
     };
     async componentDidMount() {
-        const { data, isSuccessful } = await sendRequestWithFallback('/tags', (code) => this.displatErrors(code))
+        const { data, isSuccessful } = await sendRequestWithFallback('/tags', (code) => this.displayErrors(code))
         if(isSuccessful) this.loadTags(data);
     };
     
@@ -25,7 +25,7 @@ class TagCloud extends Component{
         this.setState({ cloud: tagNames, isLoading });
     };
 
-    displayErrors(code) {
+    displayErrors() {
         this.setState({isLoading: false, isLoadedSuccessfully: false})
     }
     render() {

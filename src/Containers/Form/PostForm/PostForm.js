@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import '../Form.css';
 import Field from '../../../Components/Field/Field';
 import TagInput from './TagInput/TagInput';
-import Spinner from '../../../Components/Spinner/Spinner';
 import { createEmptyErrorFields, processErrors, sendRequestWithUserToken} from '../formLogic';
 import { withRouter } from 'react-router-dom';
 import withAuth from '../../../Context/authHoc';
+import { withSpinner } from '../../../Components/lib/util';
+
 
 class PostForm extends Component {
     constructor(props) {
@@ -64,7 +65,7 @@ class PostForm extends Component {
     }
 
     render() {
-        const { fields, errors } = this.state;
+        const { fields, errors, isLoading } = this.state;
         return(
             <form onSubmit={this.submitHandler}>
                 <Field
@@ -89,8 +90,10 @@ class PostForm extends Component {
                     error={errors['content']}
                     input={<textarea rows="5" className="field__textarea" name="content" value={fields.content} onChange={this.inputChangeHandler}/>}
                 />
-                {this.state.isLoading? <div className="Form__loader-container"><Spinner size="small"/></div>:''}
-                <input type="submit" value="Create"/>
+                <div className="Form__loader-container">{
+                    withSpinner(<input className="Form__button" type="submit" value="Create"/>, isLoading, 'small')
+                }</div>
+                
             </form>
         )
     }
