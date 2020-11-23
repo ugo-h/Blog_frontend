@@ -1,0 +1,14 @@
+.Post-header{
+    margin-top: 0.5rem; 
+    justify-content: flex-start;
+}
+.Post-header__subtitle{
+    font-size: 0.8rem;
+    color: #181818;
+}
+.Post-header .Util__list__el{
+    margin: 0 0.7rem;
+}
+.Post-header__date{
+    min-width: 6rem;
+}

@@ -6,14 +6,7 @@
     flex-flow: column;
     border-top: solid rgba(200, 200, 200, 0.5) 1px;
 }
-.Post-preview__header{
-    margin-top: 0.5rem; 
-    justify-content: flex-start;
-}
-.Post-preview__header__subtitle{
-    font-size: 0.8rem;
-    color: #181818;
-}
+
 .Post-preview__title {
     font-family: 'Times New Roman', Times, serif;
     font-weight: 500;

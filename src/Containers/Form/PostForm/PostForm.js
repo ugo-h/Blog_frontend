@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../Form.css';
-import Field from '../../../Components/Field/Field';
+import Field from '../../../Components/lib/Field/Field';
 import TagInput from './TagInput/TagInput';
 import { createEmptyErrorFields, processErrors, sendRequestWithUserToken} from '../formLogic';
 import { withRouter } from 'react-router-dom';

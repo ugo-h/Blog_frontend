@@ -3,7 +3,7 @@ import './TagCloud.css';
 import TagList from '../../Components/TagsList/TagList';
 import { withSpinner } from '../../Components/lib/util';
 import { sendRequestWithFallback } from '../../Helper/handleFetchErrors';
-import ErrorMsg from '../../Components/ServerUnvailableMsg/ServerUnavailableMsg';
+import { serverUnavailableMsg as ErrorMsg } from '../../Components/lib/lib';
 
 class TagCloud extends Component{
     state = {

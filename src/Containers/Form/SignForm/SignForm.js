@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Field from '../../../Components/Field/Field';
+import Field from '../../../Components/lib/Field/Field';
 import {
     createEmptyErrorFields, 
     createFieldsFromArray,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import X from '../../../../Components/XButton/XButton';
+import { xButton as X} from '../../../../Components/lib/lib';
 import './TagInput.css';
 
 class TagInput extends Component {

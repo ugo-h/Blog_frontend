@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import TagsList from '../../Components/TagsList/TagList';
+import PostHeader from '../../Components/Posts/PostHeader/PostHeader';  
 import { withSpinner } from '../../Components/lib/util';
 import { 
     sendRequestWithFallback,
@@ -11,10 +11,7 @@ import './Post.css';
 
 class Post extends Component {
     state = {
-        title: '',
-        content: '',
-        author: '',
-        tags: [],
+        post: {},
         isLoading: true,
         isLoadedSuccessfully: true,
         errorCode: 200,
@@ -33,9 +30,9 @@ class Post extends Component {
     };
 
     loadPost(data) {
-        const { title , content, author, date, tags } = data;
+        const post = data;
         const isLoading = false;
-        this.setState({ title, content, author, date, tags, isLoading })
+        this.setState({ post, isLoading })
     };
 
     async deleteHandler() {
@@ -56,18 +53,15 @@ class Post extends Component {
     render() {
         const { isLoading } = this.state;
         const { isLoadedSuccessfully } = this.state;
+        
         return(
             <div className="Post">
             {
                 withSpinner(
                 isLoadedSuccessfully?<Fragment>
-                    <h2 className="Post__title">{ this.state.title }</h2>
-                    <div className="Post__header">
-                        <TagsList tags={ this.state.tags }/>
-                        <h3 className="Post__header__subtitle">{ this.state.author }</h3>
-                        <span className="Post__header__subtitle">{ new Date(this.state.date).toDateString() }</span>       
-                    </div>
-                    <p className="Post__content">{ this.state.content }</p>
+                    <h2 className="Post__title">{ this.state.post.title }</h2>
+                    <div className="Post__header-container"><PostHeader post={this.state.post}/></div>
+                    <p className="Post__content">{ this.state.post.content }</p>
                     <button onClick={this.deleteHandler.bind(this)}>DELETE</button>
                 </Fragment>: <Error code={this.state.errorCode} msg={this.state.errorMsg}/>, isLoading)
             }
